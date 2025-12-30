@@ -50,12 +50,29 @@ function getCategoryName(category) {
 function openTopic(category, title) {
     let topic = userTopics.find(t => t.title === title);
     
+    // Если не нашли в пользовательских темах, ищем в демо-темах
+    if (!topic && gameItems[category]) {
+        const demoTopic = gameItems[category].find(item => item.title === title);
+        if (demoTopic) {
+            topic = {
+                ...demoTopic,
+                category: category,
+                tags: []
+            };
+        }
+    }
+    
     if (!topic) {
         showNotification('Тема не найдена', 'Выбранная тема не существует', 'error');
         return;
     }
     
-    topic.views++;
+    // Увеличиваем просмотры только для пользовательских тем
+    const userTopicIndex = userTopics.findIndex(t => t.title === title);
+    if (userTopicIndex !== -1) {
+        userTopics[userTopicIndex].views++;
+        localStorage.setItem('userTopics', JSON.stringify(userTopics));
+    }
     
     const modal = document.getElementById('topicModal');
     const titleEl = document.getElementById('viewTopicTitle');
@@ -70,14 +87,26 @@ function openTopic(category, title) {
     if (dateEl) dateEl.textContent = topic.date;
     
     if (contentEl) {
+        let tagsHtml = '';
+        if (topic.tags && topic.tags.length > 0) {
+            tagsHtml = `
+                <div class="topic-tags" style="margin-top: 15px;">
+                    <strong>Тэги:</strong>
+                    ${topic.tags.map(tag => `<span class="topic-tag">${tag}</span>`).join('')}
+                </div>
+            `;
+        }
+        
         contentEl.innerHTML = `
             <div class="topic-content-text">
                 ${topic.content.replace(/\n/g, '<br>')}
             </div>
+            ${tagsHtml}
         `;
     }
     
     modal.classList.add('active');
+    loadForumTopics();
 }
 
 function loadForumTopics(filter = 'recent') {
@@ -86,8 +115,26 @@ function loadForumTopics(filter = 'recent') {
     
     let topics = [];
     
+    // Добавляем демо-темы из gameItems
+    Object.keys(gameItems).forEach(category => {
+        gameItems[category].forEach(item => {
+            topics.push({
+                id: `demo_${category}_${item.title}`,
+                category: category,
+                title: item.title,
+                content: item.content,
+                author: item.author,
+                date: item.date,
+                views: item.views,
+                replies: item.replies,
+                tags: []
+            });
+        });
+    });
+    
+    // Добавляем пользовательские темы
     if (userTopics.length > 0) {
-        topics = [...userTopics];
+        topics = topics.concat(userTopics);
     }
     
     if (topics.length === 0) {
@@ -106,6 +153,7 @@ function loadForumTopics(filter = 'recent') {
                     <span><i class="fas fa-user"></i> ${topic.author}</span>
                     <span><i class="fas fa-clock"></i> ${topic.date}</span>
                     <span><i class="fas fa-tag"></i> ${getCategoryName(topic.category)}</span>
+                    ${topic.tags && topic.tags.length > 0 ? `<span><i class="fas fa-tags"></i> ${topic.tags.join(', ')}</span>` : ''}
                 </div>
             </div>
             <div class="topic-stats">
@@ -130,6 +178,7 @@ function initForum() {
     const createTopicModal = document.getElementById('createTopicModal');
     const closeTopicModal = document.getElementById('closeTopicModal');
     const cancelTopicBtn = document.getElementById('cancelTopic');
+    const createTopicForm = document.getElementById('createTopicForm');
     
     if (createTopicBtn) {
         createTopicBtn.addEventListener('click', () => {
@@ -155,6 +204,62 @@ function initForum() {
         });
     }
     
+    // Обработчик тэгов
+    const tagOptions = document.querySelectorAll('.tag-option');
+    tagOptions.forEach(tag => {
+        tag.addEventListener('click', () => {
+            const selectedTags = document.querySelectorAll('.tag-option.selected');
+            if (tag.classList.contains('selected')) {
+                tag.classList.remove('selected');
+            } else if (selectedTags.length < 5) {
+                tag.classList.add('selected');
+            } else {
+                showNotification('Максимум тэгов', 'Можно выбрать максимум 5 тэгов', 'warning');
+            }
+        });
+    });
+    
+    // Обработчик создания темы
+    if (createTopicForm) {
+        createTopicForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const category = document.getElementById('topicCategory').value;
+            const title = document.getElementById('topicTitle').value;
+            const content = document.getElementById('topicContent').value;
+            const selectedTags = Array.from(document.querySelectorAll('.tag-option.selected')).map(tag => tag.textContent);
+            
+            if (!category || !title || !content) {
+                showNotification('Ошибка', 'Заполните все обязательные поля', 'error');
+                return;
+            }
+            
+            const newTopic = {
+                id: Date.now(),
+                category: category,
+                title: title,
+                content: content,
+                author: currentUser.username,
+                date: new Date().toLocaleString(),
+                views: 0,
+                replies: 0,
+                tags: selectedTags
+            };
+            
+            userTopics.push(newTopic);
+            localStorage.setItem('userTopics', JSON.stringify(userTopics));
+            
+            createTopicModal.classList.remove('active');
+            createTopicForm.reset();
+            document.querySelectorAll('.tag-option.selected').forEach(tag => tag.classList.remove('selected'));
+            
+            loadForumTopics();
+            updateForumStats();
+            
+            showNotification('Тема создана', `Тема "${title}" успешно создана`, 'success');
+        });
+    }
+    
     const forumTabs = document.querySelectorAll('.forum-tab');
     forumTabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -167,6 +272,16 @@ function initForum() {
         });
     });
     
-    updateForumStats();
+    // Обработчик закрытия модального окна просмотра темы
+    const closeViewTopicModal = document.getElementById('closeViewTopicModal');
+    const topicModal = document.getElementById('topicModal');
+    
+    if (closeViewTopicModal && topicModal) {
+        closeViewTopicModal.addEventListener('click', () => {
+            topicModal.classList.remove('active');
+        });
+    }
+    
     loadForumTopics();
+    updateForumStats();
 }

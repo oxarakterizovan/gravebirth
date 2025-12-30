@@ -5,10 +5,19 @@
 function deletePost(button) {
     const post = button.closest('.post');
     if (post) {
-        const postIndex = Array.from(post.parentNode.children).indexOf(post) - 1;
-        if (postIndex >= 0 && postIndex < userPosts.length) {
+        const postContent = post.querySelector('.post-content').textContent;
+        const postDate = post.querySelector('.post-header span:last-child').textContent;
+        
+        // Находим индекс поста по содержимому и дате
+        const postIndex = userPosts.findIndex(p => 
+            p.content === postContent && 
+            p.date === postDate && 
+            p.author === (currentUser ? currentUser.username : '')
+        );
+        
+        if (postIndex !== -1) {
             userPosts.splice(postIndex, 1);
-            localStorage.setItem('userPosts', JSON.stringify(userPosts));
+            localStorage.setItem('allUserPosts', JSON.stringify(userPosts));
         }
         
         post.remove();
@@ -23,11 +32,22 @@ function deletePost(button) {
             
             updateProfileData();
             saveCurrentUser();
+            
+            // Обновляем сохраненные аккаунты
+            const accounts = getSavedAccounts();
+            const accountIndex = accounts.findIndex(acc => acc.id === activeAccountId);
+            if (accountIndex !== -1) {
+                accounts[accountIndex].userData = currentUser;
+                localStorage.setItem('savedAccounts', JSON.stringify(accounts));
+            }
         }
         
         const postsContainer = document.getElementById('postsContainer');
         const noPostsMessage = document.getElementById('noPostsMessage');
-        if (postsContainer && postsContainer.children.length === 1 && noPostsMessage) {
+        const currentUserPosts = userPosts.filter(p => p.author === (currentUser ? currentUser.username : ''));
+        
+        if (postsContainer && currentUserPosts.length === 0 && noPostsMessage) {
+            postsContainer.appendChild(noPostsMessage);
             noPostsMessage.style.display = 'block';
         }
         
@@ -43,7 +63,10 @@ function loadUserPosts() {
     
     postsContainer.innerHTML = '';
     
-    if (userPosts.length === 0) {
+    // Фильтруем посты только для текущего пользователя
+    const currentUserPosts = userPosts.filter(post => post.author === (currentUser ? currentUser.username : ''));
+    
+    if (currentUserPosts.length === 0) {
         if (noPostsMessage) {
             postsContainer.appendChild(noPostsMessage);
             noPostsMessage.style.display = 'block';
@@ -53,7 +76,7 @@ function loadUserPosts() {
     
     if (noPostsMessage) noPostsMessage.style.display = 'none';
     
-    userPosts.forEach(postData => {
+    currentUserPosts.forEach((postData, index) => {
         const postElement = document.createElement('div');
         postElement.className = 'post fade-in';
         postElement.innerHTML = `
@@ -167,10 +190,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedPosts = localStorage.getItem('userPosts');
     if (savedPosts) {
         try {
-            userPosts = JSON.parse(savedPosts);
+            // Очищаем старые посты
+            localStorage.removeItem('userPosts');
         } catch (e) {
-            console.error('Error loading posts:', e);
+            console.error('Error cleaning old posts:', e);
         }
+    }
+    
+    // Загружаем все посты
+    const savedAllPosts = localStorage.getItem('allUserPosts');
+    if (savedAllPosts) {
+        try {
+            userPosts = JSON.parse(savedAllPosts);
+        } catch (e) {
+            userPosts = [];
+        }
+    } else {
+        userPosts = [];
     }
     
     notificationsEnabled = localStorage.getItem('notificationsEnabled') !== 'false';
@@ -179,10 +215,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
     
-    showPage('home');
+    // Восстанавливаем последнюю активную страницу
+    const savedPage = localStorage.getItem('currentPage') || 'home';
+    showPage(savedPage);
+    
+    // Загружаем посты если пользователь вошел и находится на странице профиля
+    if (isLoggedIn && savedPage === 'profile') {
+        setTimeout(() => loadUserPosts(), 100);
+    }
+    
+    // Временная очистка всех постов для отладки
+    localStorage.removeItem('userPosts');
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('userPosts_')) {
+            localStorage.removeItem(key);
+        }
+    });
+    userPosts = [];
+    
+    // Инициализация навигации
+    initNavigation();
     
     // Инициализация форм аутентификации
     initAuthForms();
+    
+    // ВРЕМЕННО: Очистка всех постов для отладки
+    // localStorage.removeItem('userPosts');
+    // userPosts = [];
     
     window.switchTab = function(tabId) {
         document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
@@ -322,6 +381,60 @@ document.addEventListener('DOMContentLoaded', () => {
         addAccountBtn.addEventListener('click', () => {
             switchAccountModal.classList.remove('active');
             loginModal.classList.add('active');
+        });
+    }
+    
+    // Обработчик для создания постов в профиле
+    const submitPostBtn = document.getElementById('submitPostBtn');
+    const newPostText = document.getElementById('newPostText');
+    
+    if (submitPostBtn && newPostText) {
+        submitPostBtn.addEventListener('click', () => {
+            if (!isLoggedIn || !currentUser) {
+                showNotification('Ошибка', 'Необходимо войти в систему', 'error');
+                return;
+            }
+            
+            const content = newPostText.value.trim();
+            if (!content) {
+                showNotification('Ошибка', 'Введите текст сообщения', 'error');
+                return;
+            }
+            
+            const newPost = {
+                id: Date.now(),
+                author: currentUser.username,
+                content: content,
+                date: new Date().toLocaleString(),
+                avatar: currentUser.avatar,
+                avatarImage: currentUser.avatarImage
+            };
+            
+            userPosts.unshift(newPost);
+            localStorage.setItem('allUserPosts', JSON.stringify(userPosts));
+            
+            currentUser.messages = (currentUser.messages || 0) + 1;
+            
+            const demoUserIndex = demoUsers.findIndex(u => u.username === currentUser.username);
+            if (demoUserIndex !== -1) {
+                demoUsers[demoUserIndex].messages = currentUser.messages;
+            }
+            
+            updateProfileData();
+            saveCurrentUser();
+            
+            // Обновляем сохраненные аккаунты
+            const accounts = getSavedAccounts();
+            const accountIndex = accounts.findIndex(acc => acc.id === activeAccountId);
+            if (accountIndex !== -1) {
+                accounts[accountIndex].userData = currentUser;
+                localStorage.setItem('savedAccounts', JSON.stringify(accounts));
+            }
+            
+            newPostText.value = '';
+            loadUserPosts();
+            
+            showNotification('Сообщение опубликовано', 'Ваше сообщение добавлено в профиль', 'success');
         });
     }
 });

@@ -886,6 +886,7 @@ input:checked + .slider:before {
     transition: var(--transition);
     color: var(--text-secondary);
     font-size: 0.9rem;
+    user-select: none;
 }
 
 .tag-option:hover {
@@ -894,8 +895,25 @@ input:checked + .slider:before {
 }
 
 .tag-option.selected {
-    background: rgba(100, 100, 100, 0.8);
-    color: var(--text-primary);
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+
+.topic-tags {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.topic-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin: 0 5px 5px 0;
 }
 
 .tag-check {

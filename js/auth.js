@@ -264,6 +264,7 @@ function logout() {
     isLoggedIn = false;
     currentUser = null;
     localStorage.removeItem('currentUser');
+    
     updateUserUI();
     showPage('home');
     showNotification('Выход выполнен', 'Вы успешно вышли из системы', 'success');
@@ -286,6 +287,18 @@ function completeLogin(user, rememberMe) {
     
     // Сохраняем аккаунт в список
     saveAccount(currentUser);
+    
+    // Загружаем все посты
+    const savedAllPosts = localStorage.getItem('allUserPosts');
+    if (savedAllPosts) {
+        try {
+            userPosts = JSON.parse(savedAllPosts);
+        } catch (e) {
+            userPosts = [];
+        }
+    } else {
+        userPosts = [];
+    }
     
     if (rememberMe) {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));

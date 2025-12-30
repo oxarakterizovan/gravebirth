@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACK TRIAD CSC - Developer Host Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="css/components/header.css">
+    <link rel="stylesheet" href="css/components/profile.css">
+    
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="css/pages/home.css">
+</head>
+<body class="dark-theme">
+    <!-- Контейнер для уведомлений -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Header с навигацией -->
+    <header id="mainHeader">
+        <div class="logo" id="logo">
+            <img src="logo.png" alt="BTC" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
+            <div class="logo-text">BTC</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link" data-page="home">Main</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
+                <li id="user-controls">
+                    <button class="auth-btn" id="authBtn">Sign In</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Выпадающее меню профиля -->
+    <div class="profile-dropdown" id="profileDropdown">
+        <div class="profile-dropdown-header">
+            <div class="username" id="dropdownUsername">GRAVEBIRTH</div>
+            <div class="email" id="dropdownEmail">admin@gravebirth.com</div>
+        </div>
+        <a href="#" class="profile-dropdown-item" id="profileLink">
+            <i class="fas fa-user"></i> Мой профиль
+        </a>
+        <a href="#" class="profile-dropdown-item" id="settingsLink">
+            <i class="fas fa-cog"></i> Настройки
+        </a>
+        <a href="#" class="profile-dropdown-item" id="switchAccountLink">
+            <i class="fas fa-exchange-alt"></i> Сменить аккаунт
+        </a>
+        <a href="#" class="profile-dropdown-item" id="logoutLink">
+            <i class="fas fa-sign-out-alt"></i> Выйти
+        </a>
+    </div>
+
+    <!-- Главная страница -->
+    <main class="main-content" id="home-page">
+        <h1 class="fade-in">BLACK TRIAD CSC</h1>
+        <p class="subtitle fade-in">DEVELOPER HOST MANAGER</p>
+        <a href="#" class="btn fade-in" id="contactBtn">CONTACT ME</a>
+        
+        <!-- Контент в левой части -->
+        <div class="left-content fade-in">
+            <div class="content-block">
+                <h2>About Us</h2>
+                <p>We are a friendly team that helps newbies and informs more experienced players about news, bugs, and fixes that occur in the mode.</p>
+            </div>
+            
+            <div class="content-block">
+                <h2>Navigation</h2>
+                <ul>
+                    <li><a href="#" data-page="about"><i class="fas fa-users"></i> About Us</a></li>
+                    <li><a href="#" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#" data-page="forum"><i class="fas fa-comments"></i> Forum</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Страница About -->
+    <div class="page-content" id="about-page" style="display: none;">
+        <div class="page-header fade-in">
+            <h2>About Us</h2>
+            <p>We are a friendly team that helps newbies and informs more experienced players.</p>
+        </div>
+    </div>
+
+    <!-- Страница Contact -->
+    <div class="page-content" id="contact-page" style="display: none;">
+        <div class="page-header fade-in">
+            <h2>Contact Information</h2>
+            <p>Get in touch with me for collaborations or inquiries</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Utilities -->
+    <script src="js/utils/dom.js"></script>
+    <script src="js/utils/storage.js"></script>
+    
+    <!-- JavaScript Modules -->
+    <script src="js/modules/state.js"></script>
+    
+    <!-- JavaScript Components -->
+    <script src="js/components/notification.js"></script>
+    <script src="js/components/navigation.js"></script>
+    
+    <!-- Main Application -->
+    <script src="js/app.js"></script>
+</body>
+</html>

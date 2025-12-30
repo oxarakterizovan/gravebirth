@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACK TRIAD CSC - Modular</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="logo">
+            <img src="logo.png" alt="BTC" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
+            <div class="logo-text">BTC</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link" data-page="home">Main</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
+                <li id="user-controls">
+                    <button class="auth-btn" id="authBtn">Sign In</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="home-page">
+        <h1>BLACK TRIAD CSC</h1>
+        <p class="subtitle">MODULAR ARCHITECTURE</p>
+        <button class="btn" id="contactBtn">CONTACT ME</button>
+    </main>
+
+    <!-- Pages -->
+    <div class="page-content" id="about-page">
+        <h2>About Us - Modular Version</h2>
+    </div>
+
+    <div class="page-content" id="contact-page">
+        <h2>Contact - Modular Version</h2>
+    </div>
+
+    <div class="page-content" id="forum-page">
+        <h2>Forum - Modular Version</h2>
+    </div>
+
+    <div class="page-content" id="profile-page">
+        <h2>Profile - Modular Version</h2>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2>Вход</h2>
+            <form id="loginForm">
+                <input type="text" placeholder="Username or Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="src/core/App.js"></script>
+</body>
+</html>

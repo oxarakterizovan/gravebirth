@@ -1,0 +1,200 @@
+// ============================================
+// НАСТРОЙКИ И БЕЗОПАСНОСТЬ
+// ============================================
+
+function switchTab(tabId) {
+    document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.settings-content').forEach(c => c.classList.remove('active'));
+    
+    document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+    const content = document.getElementById(`${tabId}-tab`);
+    if (content) content.classList.add('active');
+}
+
+function initSettingsTabs() {
+    const settingsTabs = document.querySelectorAll('.settings-tab');
+    const settingsContents = document.querySelectorAll('.settings-content');
+    
+    settingsTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
+            
+            settingsTabs.forEach(t => t.classList.remove('active'));
+            settingsContents.forEach(c => c.classList.remove('active'));
+            
+            tab.classList.add('active');
+            const content = document.getElementById(`${tabId}-tab`);
+            if (content) content.classList.add('active');
+            
+            if (tabId === 'security') {
+                setTimeout(() => {
+                    updateSecurityTab();
+                    initSecurityTab();
+                }, 100);
+            }
+        });
+    });
+}
+
+function updateSecurityTab() {
+    if (currentUser) {
+        const loginCount = document.getElementById('loginCount');
+        const lastLogin = document.getElementById('lastLogin');
+        
+        if (loginCount) loginCount.textContent = currentUser.loginCount || 0;
+        if (lastLogin) lastLogin.textContent = currentUser.lastLogin || '-';
+        
+        const currentEmailDisplay = document.getElementById('currentEmailDisplay');
+        if (currentEmailDisplay) {
+            currentEmailDisplay.textContent = currentUser.email;
+        }
+        
+        const currentPhoneDisplay = document.getElementById('currentPhoneDisplay');
+        if (currentPhoneDisplay && currentUser.security && currentUser.security.phone) {
+            currentPhoneDisplay.textContent = currentUser.security.phone;
+        }
+    }
+}
+
+function loadSettings() {
+    if (!currentUser) {
+        setTimeout(() => loadSettings(), 100);
+        return;
+    }
+    
+    const adminTab = document.getElementById('adminTab');
+    if (adminTab && currentUser.isAdmin) {
+        adminTab.style.display = 'block';
+    }
+    
+    const currentUserId = document.getElementById('currentUserId');
+    const currentUsername = document.getElementById('currentUsername');
+    if (currentUserId) currentUserId.textContent = currentUser.userId || '#123456';
+    if (currentUsername) currentUsername.textContent = currentUser.username;
+    
+    const globalLanguageSelect = document.getElementById('globalLanguageSelect');
+    if (globalLanguageSelect) {
+        globalLanguageSelect.value = currentLanguage;
+        globalLanguageSelect.addEventListener('change', (e) => {
+            currentLanguage = e.target.value;
+            localStorage.setItem('language', currentLanguage);
+            showNotification('Язык изменен', 'Перезагрузите страницу для применения изменений', 'info');
+        });
+    }
+    
+    const siteNotifications = document.getElementById('siteNotifications');
+    const soundNotifications = document.getElementById('soundNotifications');
+    const forumNotifications = document.getElementById('forumNotifications');
+    const messageNotifications = document.getElementById('messageNotifications');
+    
+    if (siteNotifications) {
+        siteNotifications.checked = notificationsEnabled;
+        siteNotifications.addEventListener('change', (e) => {
+            notificationsEnabled = e.target.checked;
+            localStorage.setItem('notificationsEnabled', notificationsEnabled);
+            showNotification('Уведомления', notificationsEnabled ? 'Включены' : 'Отключены', 'info');
+        });
+    }
+    
+    if (soundNotifications) {
+        soundNotifications.checked = soundEnabled;
+        soundNotifications.addEventListener('change', (e) => {
+            soundEnabled = e.target.checked;
+            localStorage.setItem('soundEnabled', soundEnabled);
+            showNotification('Звуки', soundEnabled ? 'Включены' : 'Отключены', 'info');
+        });
+    }
+    
+    loadAvatarHistory();
+    
+    const uploadAvatarBtn = document.getElementById('uploadAvatarBtn');
+    const avatarUpload = document.getElementById('avatarUpload');
+    
+    if (uploadAvatarBtn && avatarUpload) {
+        uploadAvatarBtn.replaceWith(uploadAvatarBtn.cloneNode(true));
+        avatarUpload.replaceWith(avatarUpload.cloneNode(true));
+        
+        document.getElementById('uploadAvatarBtn').addEventListener('click', () => {
+            document.getElementById('avatarUpload').click();
+        });
+        
+        document.getElementById('avatarUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.match('image.*') && file.type !== 'application/json') {
+                showNotification('Ошибка', 'Поддерживаются только изображения и JSON файлы', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                if (file.type === 'application/json') {
+                    try {
+                        const avatarData = JSON.parse(event.target.result);
+                        if (avatarData.avatar || avatarData.avatarImage) {
+                            currentUser.avatar = avatarData.avatar || 'U';
+                            currentUser.avatarImage = avatarData.avatarImage || null;
+                            
+                            if (avatarData.avatarImage) {
+                                addToAvatarHistory(avatarData.avatarImage);
+                            } else if (avatarData.avatar) {
+                                addToAvatarHistory(avatarData.avatar);
+                            }
+                            
+                            const demoUserIndex = demoUsers.findIndex(u => u.username === currentUser.username);
+                            if (demoUserIndex !== -1) {
+                                demoUsers[demoUserIndex].avatar = currentUser.avatar;
+                                demoUsers[demoUserIndex].avatarImage = currentUser.avatarImage;
+                                demoUsers[demoUserIndex].avatarHistory = currentUser.avatarHistory;
+                            }
+                            
+                            updateUserUI();
+                            updateProfileData();
+                            
+                            showNotification('Аватар загружен', 'Аватар успешно загружен из JSON', 'success');
+                        } else {
+                            showNotification('Ошибка', 'JSON файл не содержит данных об аватаре', 'error');
+                        }
+                    } catch (error) {
+                        showNotification('Ошибка', 'Неверный формат JSON файла', 'error');
+                    }
+                } else {
+                    addToAvatarHistory(event.target.result);
+                    currentUser.avatarImage = event.target.result;
+                    
+                    const demoUserIndex = demoUsers.findIndex(u => u.username === currentUser.username);
+                    if (demoUserIndex !== -1) {
+                        demoUsers[demoUserIndex].avatarImage = currentUser.avatarImage;
+                        demoUsers[demoUserIndex].avatarHistory = currentUser.avatarHistory;
+                    }
+                    
+                    updateUserUI();
+                    updateProfileData();
+                    loadAvatarHistory();
+                    
+                    showNotification('Аватар загружен', 'Изображение успешно загружено как аватар', 'success');
+                }
+                
+                document.getElementById('avatarUpload').value = '';
+            };
+            
+            if (file.type === 'application/json') {
+                reader.readAsText(file);
+            } else {
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    setTimeout(() => {
+        initSecurityTab();
+        updateSecurityTab();
+    }, 200);
+}
+
+function initSecurityTab() {
+    // Минимальная реализация для безопасности
+    console.log('Security tab initialized');
+}

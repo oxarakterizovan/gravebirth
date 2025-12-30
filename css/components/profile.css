@@ -1,0 +1,92 @@
+/* Profile Dropdown Styles */
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    min-width: 250px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.profile-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown-header {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown-header .username {
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+
+.profile-dropdown-header .email {
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.profile-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    gap: 0.75rem;
+}
+
+.profile-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #00d4ff;
+}
+
+.profile-dropdown-item i {
+    width: 16px;
+    text-align: center;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.user-avatar.avatar-with-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

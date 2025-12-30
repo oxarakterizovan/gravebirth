@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACK TRIAD CSC - Developer Host Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Контейнер для уведомлений -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+
+
+    <!-- Header с навигацией -->
+    <header id="mainHeader">
+        <div class="logo" id="logo">
+            <img src="logo.png" alt="BTC" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
+            <div class="logo-text">BTC</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link" data-page="home">Main</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
+                <li id="user-controls">
+                    <button class="auth-btn" id="authBtn">Sign In</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Выпадающее меню профиля -->
+    <div class="profile-dropdown" id="profileDropdown">
+        <div class="profile-dropdown-header">
+            <div class="username" id="dropdownUsername">GRAVEBIRTH</div>
+            <div class="email" id="dropdownEmail">admin@gravebirth.com</div>
+        </div>
+        <a href="#" class="profile-dropdown-item" id="profileLink">
+            <i class="fas fa-user"></i> Мой профиль
+        </a>
+        <a href="#" class="profile-dropdown-item" id="settingsLink">
+            <i class="fas fa-cog"></i> Настройки
+        </a>
+        <a href="#" class="profile-dropdown-item" id="switchAccountLink">
+            <i class="fas fa-exchange-alt"></i> Сменить аккаунт
+        </a>
+        <a href="#" class="profile-dropdown-item" id="logoutLink">
+            <i class="fas fa-sign-out-alt"></i> Выйти
+        </a>
+    </div>
+
+    <!-- Главная страница -->
+    <main class="main-content" id="home-page">
+        <h1 class="fade-in">BLACK TRIAD CSC</h1>
+        <p class="subtitle fade-in">DEVELOPER HOST MANAGER</p>
+        <a href="#" class="btn fade-in" id="contactBtn">CONTACT ME</a>
+        
+        <!-- Контент в левой части -->
+        <div class="left-content fade-in">
+            <div class="content-block">
+                <h2>About Us</h2>
+                <p>We are a friendly team that helps newbies and informs more experienced players about news, bugs, and fixes that occur in the mode. We publish character metas depending on mode updates and reworks, as well as a list of cors or supports, for which we have compiled a list of items for comfortable gameplay.</p>
+            </div>
+            
+            <div class="content-block">
+                <h2>Navigation</h2>
+                <ul>
+                    <li><a href="#" data-page="about"><i class="fas fa-users"></i> About Us</a></li>
+                    <li><a href="#" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#" data-page="forum"><i class="fas fa-comments"></i> Forum</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Страница About Me -->
+    <div class="page-content" id="about-page">
+        <div class="page-header fade-in">
+            <h2>About Us</h2>
+            <p>We are a friendly team that helps newbies and informs more experienced players about news, bugs, and fixes that occur in the mode. We publish character metas depending on mode updates and reworks, as well as a list of cors or supports, for which we have compiled a list of items for comfortable gameplay.</p>
+        </div>
+        
+        <div class="social-icons-page">
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-telegram"></i>
+                <span>Telegram</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-discord"></i>
+                <span>Discord</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </div>
+            
+            <div class="social-icon-item fade-in">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Страница Contact -->
+    <div class="page-content" id="contact-page">
+        <div class="page-header fade-in">
+            <h2>Contact Information</h2>
+            <p>Get in touch with me for collaborations or inquiries</p>
+        </div>
+        
+        <div class="contact-info fade-in">
+            <div class="contact-detail">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Email</h3>
+                    <p>contact@gravebirth.com</p>
+                </div>
+            </div>
+            
+            <div class="contact-detail">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Location</h3>
+                    <p>Москва Сити, Москва, Российская Федерация</p>
+                </div>
+            </div>
+            
+            <div class="contact-detail">
+                <div class="contact-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Timezone</h3>
+                    <p>GMT+3 (Московское время)</p>
+                </div>
+            </div>
+            
+            <div class="contact-detail">
+                <div class="contact-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Availability</h3>
+                    <p>Available for freelance projects and consultations</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-20">
+            <button class="btn" id="sendMessageBtn">Send Message</button>
+        </div>
+    </div>
+
+    <!-- Страница настроек -->
+    <div class="page-content" id="settings-page">
+        <div class="page-header fade-in">
+            <h2>Настройки аккаунта</h2>
+            <p>Управление настройками вашего профиля и аккаунта</p>
+            
+            <!-- Выбор языка -->
+            <div class="language-selector">
+                <select id="globalLanguageSelect">
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="settings-container fade-in">
+            <div class="settings-tabs">
+                <button class="settings-tab active" data-tab="privacy" onclick="switchTab('privacy')">Приватность</button>
+                <button class="settings-tab" data-tab="security" onclick="switchTab('security')">Безопасность</button>
+                <button class="settings-tab" data-tab="account" onclick="switchTab('account')">Аккаунт</button>
+                <button class="settings-tab" data-tab="notifications" onclick="switchTab('notifications')">Уведомления</button>
+                <button class="settings-tab" data-tab="admin" id="adminTab" onclick="switchTab('admin')" style="display: none;">Админ панель</button>
+            </div>
+            
+            <div class="settings-content active" id="privacy-tab">
+                <div class="settings-section">
+                    <h3>Настройки приватности</h3>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Профиль</h4>
+                            <p>Кто может видеть ваш профиль</p>
+                        </div>
+                        <select class="privacy-select">
+                            <option value="public">Все пользователи</option>
+                            <option value="friends">Только друзья</option>
+                            <option value="private">Только я</option>
+                        </select>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Сообщения в профиле</h4>
+                            <p>Кто может видеть ваши сообщения</p>
+                        </div>
+                        <select class="privacy-select">
+                            <option value="public">Все пользователи</option>
+                            <option value="friends">Только друзья</option>
+                            <option value="private">Только я</option>
+                        </select>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Статус онлайн</h4>
+                            <p>Показывать когда вы онлайн</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Активность в форуме</h4>
+                            <p>Показывать ваши последние действия</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>Конфиденциальность</h3>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Сбор данных</h4>
+                            <p>Разрешить сбор анонимных данных для улучшения сервиса</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Рекламные рассылки</h4>
+                            <p>Получать новости и обновления на email</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Вкладка "Безопасность" -->
+            <div class="settings-content" id="security-tab">
+                <div class="settings-section">
+                    <h3>Безопасность аккаунта</h3>
+                    
+                    <div class="security-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Смена пароля</h4>
+                                <p>Обновите пароль вашего аккаунта</p>
+                            </div>
+                        </div>
+                        
+                        <form class="security-form" id="changePasswordForm" style="margin-top: 15px;">
+                            <div class="form-group">
+                                <label>Текущий пароль</label>
+                                <input type="password" id="securityCurrentPassword" 
+                                       placeholder="Введите текущий пароль" required>
+                                <small>Введите свой текущий пароль для подтверждения</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Новый пароль</label>
+                                <input type="password" id="securityNewPassword" 
+                                       placeholder="Введите новый пароль" required>
+                                <div class="password-strength">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="passwordStrengthBar"></div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <span id="passwordStrengthText">Слабый пароль</span>
+                                        <span>Пароль должен содержать минимум 8 символов</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Подтвердите новый пароль</label>
+                                <input type="password" id="securityConfirmPassword" 
+                                       placeholder="Подтвердите новый пароль" required>
+                                <small id="passwordMatchText">Пароли должны совпадать</small>
+                            </div>
+                            
+                            <button type="button" class="btn" id="savePasswordBtn" style="margin-top: 10px;">
+                                <i class="fas fa-key"></i> Сменить пароль
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="security-card" style="margin-top: 20px;">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Смена email</h4>
+                                <p>Измените адрес электронной почты</p>
+                            </div>
+                        </div>
+                        
+                        <div class="current-info" style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                            <p><strong>Текущий email:</strong> <span id="currentEmailDisplay">admin@gravebirth.com</span></p>
+                        </div>
+                        
+                        <form class="security-form" id="changeEmailForm">
+                            <div class="form-group">
+                                <label>Новый email</label>
+                                <input type="email" id="newEmailInput" 
+                                       placeholder="Введите новый email" required>
+                                <small>На этот адрес будут приходить уведомления</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Текущий пароль</label>
+                                <input type="password" id="emailConfirmPassword" 
+                                       placeholder="Введите пароль для подтверждения" required>
+                                <small>Для безопасности требуется подтверждение паролем</small>
+                            </div>
+                            
+                            <button type="button" class="btn" id="saveEmailBtn" style="margin-top: 10px;">
+                                <i class="fas fa-envelope"></i> Сменить email
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="security-card" style="margin-top: 20px;">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Двухфакторная аутентификация</h4>
+                                <p>Дополнительная защита вашего аккаунта</p>
+                            </div>
+                        </div>
+                        
+                        <div class="two-factor-toggle" style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <i class="fas fa-mobile-alt" style="color: var(--warning-color);"></i>
+                                    <span style="font-weight: 600;">Двухфакторная аутентификация</span>
+                                </div>
+                                <small style="display: block; margin-top: 5px; color: var(--text-secondary);">
+                                    Добавить защиту с помощью телефона
+                                </small>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="twoFactorToggleMain">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div id="twoFactorPhoneSection" style="display: none;">
+                            <div class="current-info" style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <p><strong>Привязанный номер телефона:</strong></p>
+                                <p id="currentPhoneDisplay" style="color: var(--info-color); font-weight: 600; margin: 5px 0;">+7 (999) 123-45-67</p>
+                                <span class="status-badge" style="background: rgba(76,175,80,0.2); color: var(--success-color); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                    АКТИВНО
+                                </span>
+                            </div>
+                            
+                            <div class="phone-setup" style="margin-top: 15px;">
+                                <div class="form-group">
+                                    <label for="phoneNumberInput">Номер телефона</label>
+                                    <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                        <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; min-width: 60px; display: flex; align-items: center; justify-content: center;">
+                                            +7
+                                        </div>
+                                        <input type="tel" id="phoneNumberInput" 
+                                               placeholder="(999) 123-45-67" 
+                                               style="flex: 1;" 
+                                               pattern="[0-9]{10}">
+                                    </div>
+                                    <small>Номер будет использоваться только для аутентификации</small>
+                                </div>
+                                
+                                <div id="verificationCodeSection" style="display: none; margin-top: 15px;">
+                                    <div class="form-group">
+                                        <label>Код подтверждения</label>
+                                        <div style="display: flex; gap: 10px; margin: 10px 0;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                        </div>
+                                        <small>Введите 6-значный код, отправленный на ваш телефон</small>
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                    <button type="button" class="btn" id="savePhoneBtnMain">
+                                        <i class="fas fa-check"></i> Сохранить номер
+                                    </button>
+                                    <button type="button" class="btn btn-success" id="verifyCodeBtnMain" style="display: none;">
+                                        <i class="fas fa-check-circle"></i> Подтвердить код
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="security-alert" id="twoFactorAlert" style="display: none; background: rgba(33,150,243,0.1); border: 1px solid var(--info-color); border-radius: 8px; padding: 15px; margin-top: 15px;">
+                            <i class="fas fa-info-circle" style="color: var(--info-color); margin-right: 10px;"></i>
+                            <span>Двухфакторная аутентификация включена. При входе потребуется вводить код из приложения или SMS.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>История входов</h3>
+                    <div class="activity-stats">
+                        <div class="activity-item">
+                            <div class="activity-value" id="loginCount">0</div>
+                            <div class="activity-label">Всего входов</div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-value" id="lastLogin">-</div>
+                            <div class="activity-label">Последний вход</div>
+                        </div>
+                    </div>
+                    
+                    <div class="security-alert" style="background: rgba(255,152,0,0.1); border: 1px solid var(--warning-color); border-radius: 8px; padding: 15px; margin-top: 20px;">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--warning-color); margin-right: 10px;"></i>
+                        <span><strong>Последний вход:</strong> Сегодня, 17:24 с IP 192.168.1.1 (Москва, Россия)</span>
+                    </div>
+                    
+                    <div class="security-alert" style="background: rgba(76,175,80,0.1); border: 1px solid var(--success-color); border-radius: 8px; padding: 15px; margin-top: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 10px;"></i>
+                        <span><strong>Рекомендация:</strong> Регулярно меняйте пароль и используйте двухфакторную аутентификацию для максимальной безопасности.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-content" id="account-tab">
+                <div class="settings-section">
+                    <h3>Управление аккаунтом</h3>
+                    
+                    <!-- Смена никнейма -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Смена никнейма</h4>
+                                <p>Изменить ваше имя пользователя</p>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="current-info">
+                                <p><strong>Текущий никнейм:</strong> <span id="currentUsername">GRAVEBIRTH</span></p>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="newUsernameInput" placeholder="Новый никнейм">
+                                <button class="btn" id="changeUsernameBtn">Изменить</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Смена ID -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Уникальный ID</h4>
+                                <p>Ваш уникальный идентификатор</p>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="current-info">
+                                <p><strong>Текущий ID:</strong> <span id="currentUserId">#123456</span></p>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="newUserIdInput" placeholder="Новый ID (англ.)" pattern="[a-zA-Z0-9_-]+">
+                                <button class="btn" id="changeUserIdBtn">Изменить</button>
+                            </div>
+                            <small>Можно использовать только английские буквы, цифры, _ и -</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Аватар -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="card-title">
+                                <h4>Управление аватаром</h4>
+                                <p>Загрузка и смена аватара</p>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="avatar-upload-section">
+                                <button class="btn" id="uploadAvatarBtn">
+                                    <i class="fas fa-upload"></i> Загрузить новый аватар
+                                </button>
+                            </div>
+                            
+                            <div class="avatar-history-section">
+                                <h5>История аватаров</h5>
+                                <p>Последние 6 аватаров</p>
+                                <div class="avatar-history" id="avatarHistory">
+                                    <!-- История аватаров -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Уведомления</h4>
+                            <p>Настройка получения уведомлений</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-content" id="avatar-tab">
+                <div class="settings-section">
+                    <h3>Управление аватаром</h3>
+                    
+                    <div class="text-center mb-20">
+                        <button class="btn" id="uploadAvatarBtn">Загрузить новый аватар</button>
+                    </div>
+                    
+                    <h4>История аватаров</h4>
+                    <p>Последние 6 аватаров, которые вы использовали</p>
+                    
+                    <div class="avatar-history" id="avatarHistory">
+                        <!-- История аватаров будет загружена динамически -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-content" id="notifications-tab">
+                <div class="settings-section">
+                    <h3>Настройки уведомлений</h3>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Уведомления на сайте</h4>
+                            <p>Показывать уведомления в правом верхнем углу</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="siteNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Звуковые уведомления</h4>
+                            <p>Воспроизводить звук при получении уведомлений</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="soundNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Уведомления о новых ответах</h4>
+                            <p>Получать уведомления о новых ответах в форуме</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="forumNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <div class="info">
+                            <h4>Уведомления о сообщениях</h4>
+                            <p>Получать уведомления о новых личных сообщениях</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="messageNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="text-center mt-20">
+                        <button class="btn" id="testNotificationBtn">Тестовое уведомление</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-content" id="admin-tab">
+                <div class="settings-section">
+                    <h3>Администраторская панель</h3>
+                    
+                    <div class="admin-stats">
+                        <div class="admin-stat-card">
+                            <h4>Пользователи</h4>
+                            <p id="totalUsers">2</p>
+                        </div>
+                        <div class="admin-stat-card">
+                            <h4>Темы</h4>
+                            <p id="totalTopics">0</p>
+                        </div>
+                        <div class="admin-stat-card">
+                            <h4>Сообщения</h4>
+                            <p id="totalPosts">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-actions">
+                        <button class="btn" id="clearForumBtn">Очистить форум</button>
+                        <button class="btn" id="clearPostsBtn">Очистить сообщения</button>
+                        <button class="btn" id="exportDataBtn">Экспорт данных</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Страница форума -->
+    <div class="page-content" id="forum-page">
+        <div class="page-header fade-in">
+            <h2>Community Forum</h2>
+            <p>Discuss topics related to web development, server management, DevOps practices and share your knowledge with the community.</p>
+            <div class="forum-actions">
+                <button class="btn" id="createTopicBtn">
+                    <i class="fas fa-plus"></i> Create New Topic
+                </button>
+                <div class="forum-search">
+                    <input type="text" placeholder="Search topics..." id="forumSearch">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="forum-stats">
+            <div class="stat-card">
+                <i class="fas fa-comments"></i>
+                <div class="stat-info">
+                    <h3 id="activeTopicsCount">0</h3>
+                    <p>Active Topics</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h3 id="communityMembersCount">0</h3>
+                    <p>Community Members</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-reply"></i>
+                <div class="stat-info">
+                    <h3 id="totalRepliesCount">0</h3>
+                    <p>Total Replies</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-fire"></i>
+                <div class="stat-info">
+                    <h3 id="hotTopicsCount">0</h3>
+                    <p>Hot Topics</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="forum-categories">
+            <div class="category-card fade-in" data-category="team">
+                <div class="category-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Team composition</h3>
+                    <p>The team responsible for guides, support, and forum moderation</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 45 Topics</span>
+                        <span><i class="fas fa-reply"></i> 234 Replies</span>
+                    </div>
+                </div>
+                <div class="category-badge">Popular</div>
+            </div>
+            
+            <div class="category-card fade-in" data-category="core">
+                <div class="category-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Core</h3>
+                    <p>Core character builds, strategies, and gameplay mechanics for main damage dealers.</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 67 Topics</span>
+                        <span><i class="fas fa-reply"></i> 312 Replies</span>
+                    </div>
+                </div>
+                <div class="category-badge">Active</div>
+            </div>
+            
+            <div class="category-card fade-in" data-category="support">
+                <div class="category-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Support</h3>
+                    <p>Support character guides, healing strategies, and team assistance tactics.</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 38 Topics</span>
+                        <span><i class="fas fa-reply"></i> 189 Replies</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card fade-in" data-category="item-core">
+                <div class="category-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Item core</h3>
+                    <p>Core item builds, equipment recommendations, and damage optimization for main characters.</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 52 Topics</span>
+                        <span><i class="fas fa-reply"></i> 267 Replies</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card fade-in" data-category="item-support">
+                <div class="category-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Item Support</h3>
+                    <p>Support item builds, utility equipment, and team enhancement items.</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 29 Topics</span>
+                        <span><i class="fas fa-reply"></i> 145 Replies</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-card fade-in" data-category="questions">
+                <div class="category-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="category-content">
+                    <h3>Questions</h3>
+                    <p>General questions, help requests, and community discussions about gameplay mechanics.</p>
+                    <div class="category-stats">
+                        <span><i class="fas fa-comment"></i> 73 Topics</span>
+                        <span><i class="fas fa-reply"></i> 298 Replies</span>
+                    </div>
+                </div>
+                <div class="category-badge">New</div>
+            </div>
+        </div>
+        
+        <div class="forum-tabs">
+            <button class="forum-tab active" data-tab="recent">Recent Topics</button>
+            <button class="forum-tab" data-tab="popular">Popular</button>
+            <button class="forum-tab" data-tab="unanswered">Unanswered</button>
+            <button class="forum-tab" data-tab="my-topics">My Topics</button>
+        </div>
+        
+        <div class="topics-container" id="topicsContainer">
+            <!-- Topics will be loaded here dynamically -->
+        </div>
+        
+        <div class="forum-pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <span>...</span>
+            <button class="pagination-btn">10</button>
+            <button class="pagination-btn next">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Страница профиля -->
+    <div class="profile-page" id="profile-page">
+        <div class="profile-header fade-in">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profileAvatar">GB</div>
+                <div class="profile-details">
+                    <h2 id="profileUsername">GRAVEBIRTH</h2>
+                    <p>DEVELOPER HOST MANAGER</p>
+                    <p>Registration: <span id="profileRegDate">27 Янв 2025</span></p>
+                    <p id="profileStatus">Online</p>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="profileMessages">0</span>
+                    <span class="stat-label">Messages</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="profileReactions">0</span>
+                    <span class="stat-label">Reactions</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="profileTopics">0</span>
+                    <span class="stat-label">Topics</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="profileReplies">0</span>
+                    <span class="stat-label">Replies</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-posts fade-in">
+                <h3>Profile Messages</h3>
+                
+                <div class="post-form">
+                    <div class="form-group">
+                        <textarea id="newPostText" placeholder="Update your status..."></textarea>
+                    </div>
+                    <button class="btn" id="submitPostBtn">Publish</button>
+                </div>
+                
+                <div id="postsContainer">
+                    <div class="no-posts" id="noPostsMessage">
+                        There are no messages in the user profile yet.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-block fade-in">
+                <h2>Profile Information</h2>
+                <p><strong>Username:</strong> <span id="infoUsername">GRAVEBIRTH</span></p>
+                <p><strong>Email:</strong> <span id="infoEmail">admin@gravebirth.com</span></p>
+                <p><strong>Member since:</strong> <span id="infoMemberSince">January 2025</span></p>
+                <p><strong>Role:</strong> Developer & Host Manager</p>
+                <p><strong>Location:</strong> Москва Сити, Москва</p>
+                
+                <div class="activity-stats">
+                    <div class="activity-item">
+                        <div class="activity-value" id="profileLoginCount">0</div>
+                        <div class="activity-label">Всего входов</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-value" id="profileActivity">-</div>
+                        <div class="activity-label">Последняя активность</div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-20">
+                    <button class="btn" id="editProfileBtn">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальные окна -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeRegisterModal">&times;</button>
+            <h2>Регистрация</h2>
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">Имя пользователя:</label>
+                    <input type="text" id="regUsername" placeholder="Введите имя пользователя" required>
+                    <small>Это имя будет отображаться в Ваших сообщениях</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regEmail">Электронная почта:</label>
+                    <input type="email" id="regEmail" placeholder="Введите ваш email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Пароль:</label>
+                    <input type="password" id="regPassword" placeholder="Введите пароль" required>
+                    <small>Минимум 6 символов</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regConfirmPassword">Подтвердите пароль:</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Подтвердите пароль" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regAvatar">Аватар (необязательно):</label>
+                    <input type="file" id="regAvatar" accept=".png,.jpg,.jpeg,.gif" style="padding: 8px;">
+                    <small>Вы можете загрузить аватар сразу при регистрации</small>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="regTerms" required>
+                    <label for="regTerms">Я согласен(на) с <a href="#" id="termsLink">условиями использования</a> и <a href="#" id="privacyLink">политикой конфиденциальности</a>.</label>
+                </div>
+                
+                <div class="timer" id="registerTimer">
+                    Вы можете зарегистрироваться через: <span id="timerCount">10</span> секунд
+                </div>
+                
+                <button type="submit" class="btn" id="registerSubmitBtn" disabled>Регистрация</button>
+                
+                <div class="form-links">
+                    Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeLoginModal">&times;</button>
+            <h2>Вход</h2>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Имя пользователя или email:</label>
+                    <input type="text" id="loginUsername" placeholder="Введите имя пользователя или email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Пароль:</label>
+                    <input type="password" id="loginPassword" placeholder="Введите пароль" required>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Запомнить меня</label>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="showPassword">
+                    <label for="showPassword">Показать пароль</label>
+                </div>
+                
+                <button type="submit" class="btn">Войти</button>
+                
+                <div class="form-links">
+                    <a href="#" id="forgotPasswordLink">Забыли пароль?</a><br>
+                    Нет аккаунта? <a href="#" id="switchToRegister">Регистрация</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="createTopicModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeTopicModal">&times;</button>
+            <h2>Create New Topic</h2>
+            <form class="auth-form" id="createTopicForm">
+                <div class="form-group">
+                    <label for="topicCategory">Category:</label>
+                    <select id="topicCategory" required>
+                        <option value="">Select category</option>
+                        <option value="team">Team composition</option>
+                        <option value="core">Core</option>
+                        <option value="support">Support</option>
+                        <option value="item-core">Item core</option>
+                        <option value="item-support">Item Support</option>
+                        <option value="questions">Questions</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="topicTitle">Topic Title:</label>
+                    <input type="text" id="topicTitle" placeholder="Enter topic title" required>
+                    <small>Make it clear and descriptive</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="topicTags">Tags:</label>
+                    <div class="tags-container">
+                        <div class="tag-option" data-value="team-strategy">Team Strategy</div>
+                        <div class="tag-option" data-value="core-build">Core Build</div>
+                        <div class="tag-option" data-value="support-guide">Support Guide</div>
+                        <div class="tag-option" data-value="item-build">Item Build</div>
+                        <div class="tag-option" data-value="gameplay-tips">Gameplay Tips</div>
+                        <div class="tag-option" data-value="character-guide">Character Guide</div>
+                        <div class="tag-option" data-value="meta-analysis">Meta Analysis</div>
+                        <div class="tag-option" data-value="beginner-friendly">Beginner Friendly</div>
+                        <div class="tag-option" data-value="advanced-tactics">Advanced Tactics</div>
+                        <div class="tag-option" data-value="patch-update">Patch Update</div>
+                    </div>
+                    <small>Select up to 5 tags</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="topicContent">Content:</label>
+                    <textarea id="topicContent" placeholder="Describe your topic in detail..." rows="8" required></textarea>
+                    <small>Use Markdown for formatting</small>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="subscribeTopic" checked>
+                    <label for="subscribeTopic">Subscribe to this topic</label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelTopic">Cancel</button>
+                    <button type="submit" class="btn">Create Topic</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="topicModal">
+        <div class="modal-content wide-modal">
+            <button class="close-modal" id="closeViewTopicModal">&times;</button>
+            <div class="topic-header">
+                <div class="topic-title">
+                    <h2 id="viewTopicTitle">Topic Title</h2>
+                    <div class="topic-meta">
+                        <span class="topic-category" id="viewTopicCategory">Web Development</span>
+                        <span class="topic-author" id="viewTopicAuthor">By: GRAVEBIRTH</span>
+                        <span class="topic-date" id="viewTopicDate">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="topic-actions">
+                    <button class="btn btn-small" id="replyToTopic"><i class="fas fa-reply"></i> Reply</button>
+                    <button class="btn btn-small" id="subscribeBtn"><i class="fas fa-bell"></i> Subscribe</button>
+                    <button class="btn btn-small" id="shareTopic"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+            
+            <div class="topic-content" id="topicContentContainer">
+                <!-- Topic content will be loaded here -->
+            </div>
+            
+            <div class="topic-replies">
+                <h3>Replies <span id="repliesCount">(0)</span></h3>
+                <div class="replies-container" id="repliesContainer">
+                    <!-- Replies will be loaded here -->
+                </div>
+                
+                <div class="reply-form" id="replyForm">
+                    <h4>Post a Reply</h4>
+                    <textarea id="replyText" placeholder="Type your reply here..." rows="4"></textarea>
+                    <div class="reply-actions">
+                        <button class="btn btn-secondary" id="cancelReply">Cancel</button>
+                        <button class="btn" id="submitReply">Post Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer с иконками соцсетей -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="#" title="Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- Скрытый input для загрузки файлов -->
+    <input type="file" id="avatarUpload" accept=".png,.jpg,.jpeg,.gif,.json" style="display: none;">
+    <input type="file" id="fileUpload" accept=".txt,.md,.json,.pdf,.doc,.docx" style="display: none;">
+
+    <!-- Модальное окно условий использования -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content wide-modal">
+            <button class="close-modal" id="closeTermsModal">&times;</button>
+            <h2>Условия использования</h2>
+            <div class="terms-content">
+                <h3>1. Общие положения</h3>
+                <p>Данный сайт предназначен для публикации руководств и гайдов по игровому режиму CSC (Cristalix Survival Championship) на проекте Cristalix в игре Minecraft.</p>
+                
+                <h3>2. Назначение сайта</h3>
+                <p>Сайт создан исключительно в образовательных целях для:</p>
+                <ul>
+                    <li>Публикации руководств по персонажам CSC режима</li>
+                    <li>Обмена игровыми стратегиями и тактиками</li>
+                    <li>Создания сообщества игроков CSC</li>
+                    <li>Помощи новичкам в освоении режима</li>
+                </ul>
+                
+                <h3>3. Права на контент</h3>
+                <p>Все руководства и гайды создаются на основе:</p>
+                <ul>
+                    <li>Публично доступной информации об игровом режиме</li>
+                    <li>Личного игрового опыта авторов</li>
+                    <li>Анализа игровой механики CSC</li>
+                </ul>
+                <p>Сайт не претендует на права интеллектуальной собственности проекта Cristalix.</p>
+                
+                <h3>4. Ответственность пользователей</h3>
+                <p>Пользователи обязуются:</p>
+                <ul>
+                    <li>Не публиковать материалы, нарушающие правила Cristalix</li>
+                    <li>Соблюдать этику общения в сообществе</li>
+                    <li>Не распространять конфиденциальную информацию</li>
+                    <li>Уважать авторские права</li>
+                </ul>
+                
+                <h3>5. Отказ от ответственности</h3>
+                <p>Администрация сайта не несет ответственности за:</p>
+                <ul>
+                    <li>Изменения в игровой механике CSC</li>
+                    <li>Действия пользователей на проекте Cristalix</li>
+                    <li>Актуальность опубликованных руководств</li>
+                </ul>
+                
+                <p><strong>Дата последнего обновления:</strong> 27 января 2025 г.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно переключения аккаунтов -->
+    <div class="modal" id="switchAccountModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeSwitchAccountModal">&times;</button>
+            <h2>Переключение аккаунтов</h2>
+            
+            <div class="accounts-list" id="accountsList">
+                <!-- Список аккаунтов -->
+            </div>
+            
+            <div class="account-actions">
+                <button class="btn btn-secondary" id="addAccountBtn">
+                    <i class="fas fa-plus"></i> Добавить аккаунт
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно восстановления пароля -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeForgotPasswordModal">&times;</button>
+            <h2>Восстановление пароля</h2>
+            <form class="auth-form" id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="recoveryEmail">Электронная почта:</label>
+                    <input type="email" id="recoveryEmail" placeholder="Введите ваш email" required>
+                    <small>На этот адрес будет отправлена ссылка для восстановления пароля</small>
+                </div>
+                
+                <button type="submit" class="btn">Отправить ссылку</button>
+                
+                <div class="admin-contact-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Не помните почту?</h4>
+                        <p>Если вы не помните адрес электронной почты, привязанный к аккаунту, обратитесь к администрации:</p>
+                        <div class="admin-contacts">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>admin@gravebirth.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-telegram"></i>
+                                <span>@gravebirth_admin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-links">
+                    <a href="#" id="backToLogin">Вернуться к входу</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно политики конфиденциальности -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content wide-modal">
+            <button class="close-modal" id="closePrivacyModal">&times;</button>
+            <h2>Политика конфиденциальности</h2>
+            <div class="terms-content">
+                <h3>1. Сбор информации</h3>
+                <p>Мы собираем только необходимую информацию:</p>
+                <ul>
+                    <li>Имя пользователя (никнейм)</li>
+                    <li>Адрес электронной почты</li>
+                    <li>Данные профиля (аватар, статистика форума)</li>
+                    <li>Техническая информация (IP-адрес, браузер)</li>
+                </ul>
+                
+                <h3>2. Использование данных</h3>
+                <p>Собранная информация используется для:</p>
+                <ul>
+                    <li>Функционирования пользовательских аккаунтов</li>
+                    <li>Модерации контента и форума</li>
+                    <li>Улучшения работы сайта</li>
+                    <li>Связи с пользователями по важным вопросам</li>
+                </ul>
+                
+                <h3>3. Защита данных</h3>
+                <p>Мы обеспечиваем защиту ваших данных:</p>
+                <ul>
+                    <li>Пароли хранятся в зашифрованном виде</li>
+                    <li>Доступ к данным имеют только администраторы</li>
+                    <li>Регулярное резервное копирование</li>
+                    <li>Защита от несанкционированного доступа</li>
+                </ul>
+                
+                <h3>4. Передача данных третьим лицам</h3>
+                <p>Мы НЕ передаем ваши данные третьим лицам, за исключением:</p>
+                <ul>
+                    <li>Требований законодательства</li>
+                    <li>Защиты прав и безопасности пользователей</li>
+                    <li>Технических партнеров (хостинг-провайдеры)</li>
+                </ul>
+                
+                <h3>5. Права пользователей</h3>
+                <p>Вы имеете право:</p>
+                <ul>
+                    <li>Просматривать свои данные в профиле</li>
+                    <li>Изменять личную информацию</li>
+                    <li>Удалить свой аккаунт</li>
+                    <li>Отозвать согласие на обработку данных</li>
+                </ul>
+                
+                <h3>6. Соответствие проекту Cristalix</h3>
+                <p>Данная политика не противоречит правилам проекта Cristalix. Сайт создан как независимый ресурс сообщества для образовательных целей.</p>
+                
+                <p><strong>Дата последнего обновления:</strong> 27 января 2025 г.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/forum.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

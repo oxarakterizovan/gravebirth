@@ -34,7 +34,7 @@ function showPage(pageId) {
     }
     
     const navLinks = document.querySelectorAll('.nav-link');
-    const leftNavLinks = document.querySelectorAll('.left-content a');
+    const leftNavLinks = document.querySelectorAll('.left-content a[data-page]');
     
     navLinks.forEach(link => {
         link.classList.remove('active');
@@ -63,6 +63,9 @@ function showPage(pageId) {
         loadUserPosts();
     }
 }
+
+// Делаем функцию глобально доступной
+window.showPage = showPage;
 
 function goBack() {
     if (currentHistoryIndex > 0) {
@@ -122,9 +125,10 @@ function goForward() {
 
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    const leftNavLinks = document.querySelectorAll('.left-content a');
+    const leftNavLinks = document.querySelectorAll('.left-content a[data-page]');
     const loginModal = document.getElementById('loginModal');
     
+    // Обработчик для основных навигационных ссылок в хедере
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -142,6 +146,7 @@ function initNavigation() {
         });
     });
     
+    // Обработчик для навигационных ссылок в левой части главной страницы
     leftNavLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();

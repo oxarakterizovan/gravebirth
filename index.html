@@ -24,7 +24,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="nav-link" data-page="home">Main</a></li>
+                <li><a href="#" class="nav-link active" data-page="home">Main</a></li>
                 <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
                 <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                 <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
@@ -903,6 +903,50 @@
                 
                 <div class="text-center mt-20">
                     <button class="btn" id="editProfileBtn">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Страница просмотра темы -->
+    <div class="page-content" id="topic-view-page">
+        <div class="topic-view-container">
+            <div class="topic-view-sidebar">
+                <div class="author-card">
+                    <div class="author-avatar" id="topicAuthorAvatar">A</div>
+                    <div class="author-info">
+                        <h3 id="topicAuthorName">Author</h3>
+                        <p class="author-role" id="topicAuthorRole">Member</p>
+                        <div class="author-stats">
+                            <div class="stat">
+                                <span class="stat-value" id="topicAuthorReactions">0</span>
+                                <span class="stat-label">Reactions</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="topicAuthorTopics">0</span>
+                                <span class="stat-label">Topics</span>
+                            </div>
+                        </div>
+                        <div class="topic-date">
+                            <i class="fas fa-clock"></i>
+                            <span id="topicCreatedDate">Date</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-back" onclick="showPage('forum')">
+                    <i class="fas fa-arrow-left"></i> Back to Forum
+                </button>
+            </div>
+            
+            <div class="topic-view-content">
+                <div class="topic-header">
+                    <div class="topic-category" id="topicViewCategory">Category</div>
+                    <h1 id="topicViewTitle">Topic Title</h1>
+                    <div class="topic-tags" id="topicViewTags"></div>
+                </div>
+                
+                <div class="topic-content" id="topicViewContent">
+                    Topic content will be displayed here...
                 </div>
             </div>
         </div>

@@ -101,7 +101,7 @@ function loadUserPosts() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
     console.log('GRAVEBIRTH Website Loaded');
     
     const authBtn = document.getElementById('authBtn');
@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
+    // Инициализация навигации
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -121,13 +122,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    document.querySelectorAll('.left-content a').forEach(link => {
+    document.querySelectorAll('.left-content a[data-page]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = link.getAttribute('data-page');
             showPage(page);
         });
     });
+    
+    // Логотип для перехода на главную
+    const logo = document.getElementById('logo');
+    if (logo) {
+        logo.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('home');
+        });
+        logo.style.cursor = 'pointer';
+    }
     
     const closeLoginModal = document.getElementById('closeLoginModal');
     const closeRegisterModal = document.getElementById('closeRegisterModal');
@@ -215,9 +226,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     setTheme(savedTheme);
     
-    // Восстанавливаем последнюю активную страницу
-    const savedPage = localStorage.getItem('currentPage') || 'home';
-    showPage(savedPage);
+    // Проверяем sessionStorage для открытия темы в новой вкладке
+    const topicToOpen = sessionStorage.getItem('openTopic');
+    if (topicToOpen) {
+        try {
+            const { category, title } = JSON.parse(topicToOpen);
+            sessionStorage.removeItem('openTopic');
+            setTimeout(() => {
+                openTopic(category, title);
+            }, 500);
+        } catch (e) {
+            console.error('Error parsing topic data:', e);
+        }
+    } else {
+        // Восстанавливаем последнюю активную страницу
+        const savedPage = localStorage.getItem('currentPage') || 'home';
+        
+        // Проверяем URL хэш для прямых ссылок на темы
+        const hash = window.location.hash;
+        if (hash.startsWith('#topic/')) {
+            const parts = hash.substring(7).split('/');
+            if (parts.length === 2) {
+                const category = parts[0];
+                const title = decodeURIComponent(parts[1]);
+                setTimeout(() => {
+                    openTopic(category, title);
+                }, 500);
+            }
+        } else {
+            showPage(savedPage);
+        }
+    }
     
     // Загружаем посты если пользователь вошел и находится на странице профиля
     if (isLoggedIn && savedPage === 'profile') {

@@ -208,11 +208,17 @@ function initAuthForms() {
 function updateUserUI() {
     const userControls = document.getElementById('user-controls');
     const authBtn = document.getElementById('authBtn');
+    const adminSubtitle = document.getElementById('adminSubtitle');
     
     if (!userControls) return;
     
     if (isLoggedIn && currentUser) {
         if (authBtn) authBtn.style.display = 'none';
+        
+        // Показываем подзаголовок только для администраторов
+        if (adminSubtitle) {
+            adminSubtitle.style.display = currentUser.isAdmin ? 'block' : 'none';
+        }
         
         userControls.innerHTML = `
             <div class="user-info" id="userAvatarBtn">
@@ -241,6 +247,12 @@ function updateUserUI() {
         
     } else {
         if (authBtn) authBtn.style.display = 'block';
+        
+        // Скрываем подзаголовок для неавторизованных пользователей
+        if (adminSubtitle) {
+            adminSubtitle.style.display = 'none';
+        }
+        
         userControls.innerHTML = '<button class="auth-btn" id="authBtn">Sign In</button>';
         
         const newAuthBtn = document.getElementById('authBtn');

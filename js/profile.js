@@ -44,7 +44,8 @@ function updateProfileData() {
         'profileLoginCount': document.getElementById('profileLoginCount'),
         'profileActivity': document.getElementById('profileActivity'),
         'loginCount': document.getElementById('loginCount'),
-        'lastLogin': document.getElementById('lastLogin')
+        'lastLogin': document.getElementById('lastLogin'),
+        'infoRole': document.getElementById('infoRole')
     };
     
     for (const [id, element] of Object.entries(elements)) {
@@ -88,6 +89,9 @@ function updateProfileData() {
             case 'profileActivity':
             case 'lastLogin':
                 element.textContent = currentUser.lastLogin || '-';
+                break;
+            case 'infoRole':
+                element.textContent = currentUser.isAdmin ? 'Administrator' : 'Member';
                 break;
         }
     }

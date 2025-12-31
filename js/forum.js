@@ -1,3 +1,6 @@
+// Переменная для отслеживания текущей категории
+let currentTopicCategory = null;
+
 function updateForumStats() {
     let totalTopics = 0;
     Object.keys(gameItems).forEach(category => {
@@ -44,6 +47,15 @@ function getCategoryName(category) {
 }
 
 function openTopic(category, title) {
+    // Сохраняем текущую категорию
+    currentTopicCategory = category;
+    
+    // Показываем/скрываем кнопку Back to category
+    const backToCategoryBtn = document.getElementById('backToCategoryBtn');
+    if (backToCategoryBtn) {
+        backToCategoryBtn.style.display = 'block';
+    }
+    
     let topic = userTopics.find(t => t.title === title);
     
     if (!topic && gameItems[category]) {
@@ -353,6 +365,9 @@ function initForum() {
 }
 
 function filterByCategory(category) {
+    // Сохраняем текущую категорию
+    currentTopicCategory = category;
+    
     // Переходим на отдельную страницу категорий
     showPage('category');
     
@@ -548,3 +563,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Функция для возврата к категории
+function backToCategory() {
+    if (currentTopicCategory) {
+        filterByCategory(currentTopicCategory);
+    } else {
+        showPage('forum');
+    }
+}
+
+// Делаем функцию глобально доступной
+window.backToCategory = backToCategory;

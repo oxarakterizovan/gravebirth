@@ -7,6 +7,12 @@ let navigationHistory = ['home'];
 let currentHistoryIndex = 0;
 
 function showPage(pageId) {
+    // Скрываем кнопку Back to category при переходе на другие страницы
+    const backToCategoryBtn = document.getElementById('backToCategoryBtn');
+    if (backToCategoryBtn && pageId !== 'topic-view') {
+        backToCategoryBtn.style.display = 'none';
+    }
+    
     // Добавляем в историю только если это новая страница
     if (pageId !== navigationHistory[currentHistoryIndex]) {
         navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1);

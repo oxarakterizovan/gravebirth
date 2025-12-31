@@ -204,12 +204,11 @@ function initSecurityTab() {
             if (this.checked) {
                 emailAuthSection.style.display = 'block';
                 showNotification('Email аутентификация', 'Аутентификация через email включена', 'success');
-                updateTwoFactorAlert();
             } else {
                 emailAuthSection.style.display = 'none';
                 showNotification('Email аутентификация', 'Аутентификация через email отключена', 'info');
-                updateTwoFactorAlert();
             }
+            updateTwoFactorAlert();
         });
     }
     
@@ -223,13 +222,12 @@ function initSecurityTab() {
         telegramAuthToggle.addEventListener('change', function() {
             if (this.checked) {
                 telegramAuthSection.style.display = 'block';
-                updateTwoFactorAlert();
             } else {
                 telegramAuthSection.style.display = 'none';
                 telegramConnected.style.display = 'none';
                 showNotification('Telegram аутентификация', 'Аутентификация через Telegram отключена', 'info');
-                updateTwoFactorAlert();
             }
+            updateTwoFactorAlert();
         });
     }
     
@@ -253,7 +251,6 @@ function initSecurityTab() {
                 telegramConnected.style.display = 'block';
                 
                 showNotification('Telegram подключен', `Аутентификация через @${telegramUsername} активирована`, 'success');
-                updateTwoFactorAlert();
             }, 1500);
         });
     }

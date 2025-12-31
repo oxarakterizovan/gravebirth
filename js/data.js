@@ -89,6 +89,7 @@ const demoUsers = [
         lastLogin: new Date().toLocaleString(),
         userId: '#123456',
         isAdmin: true,
+        role: 'chief-admin',
         privacy: {
             profile: 'public',
             posts: 'public',
@@ -173,5 +174,34 @@ const pages = {
     'settings': document.getElementById('settings-page'),
     'profile': document.getElementById('profile-page'),
     'topic-view': document.getElementById('topic-view-page'),
-    'category': document.getElementById('category-page')
+    'category': document.getElementById('category-page'),
+    'admin': document.getElementById('admin-page')
 };
+
+// Функция для получения названия роли
+function getUserRole(user) {
+    if (!user) return 'Member';
+    
+    const roles = {
+        'chief-admin': 'Chief Administrator',
+        'tech-admin': 'Technical Administrator', 
+        'st-moderator': 'ST. Moderator',
+        'moderator': 'Moderator',
+        'media': 'Media',
+        'support': 'Support',
+        'helper': 'Helper'
+    };
+    
+    return roles[user.role] || (user.isAdmin ? 'Administrator' : 'Member');
+}
+
+// Проверка прав доступа
+function hasAdminRights(user) {
+    if (!user) return false;
+    return user.role === 'chief-admin' || user.role === 'tech-admin' || user.isAdmin;
+}
+
+function hasModeratorRights(user) {
+    if (!user) return false;
+    return hasAdminRights(user) || user.role === 'st-moderator' || user.role === 'moderator';
+}

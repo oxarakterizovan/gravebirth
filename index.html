@@ -28,6 +28,7 @@
                 <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
                 <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                 <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
+                <li><a href="#" class="nav-link" data-page="admin" id="adminNavLink" style="display: none;">Admin</a></li>
                 <li id="user-controls">
                     <button class="auth-btn" id="authBtn">Sign In</button>
                 </li>
@@ -206,7 +207,6 @@
                 <button class="settings-tab" data-tab="security" onclick="switchTab('security')">Безопасность</button>
                 <button class="settings-tab" data-tab="account" onclick="switchTab('account')">Аккаунт</button>
                 <button class="settings-tab" data-tab="notifications" onclick="switchTab('notifications')">Уведомления</button>
-                <button class="settings-tab" data-tab="admin" id="adminTab" onclick="switchTab('admin')" style="display: none;">Админ панель</button>
             </div>
             
             <div class="settings-content active" id="privacy-tab">
@@ -642,33 +642,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="settings-content" id="admin-tab">
-                <div class="settings-section">
-                    <h3>Администраторская панель</h3>
-                    
-                    <div class="admin-stats">
-                        <div class="admin-stat-card">
-                            <h4>Пользователи</h4>
-                            <p id="totalUsers">2</p>
-                        </div>
-                        <div class="admin-stat-card">
-                            <h4>Темы</h4>
-                            <p id="totalTopics">0</p>
-                        </div>
-                        <div class="admin-stat-card">
-                            <h4>Сообщения</h4>
-                            <p id="totalPosts">0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-actions">
-                        <button class="btn" id="clearForumBtn">Очистить форум</button>
-                        <button class="btn" id="clearPostsBtn">Очистить сообщения</button>
-                        <button class="btn" id="exportDataBtn">Экспорт данных</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1092,6 +1065,41 @@
         </div>
     </div>
 
+    <!-- Страница администрирования -->
+    <div class="page-content" id="admin-page">
+        <div class="page-header fade-in">
+            <h2>Chief Administrator Panel</h2>
+            <p>Управление пользователями, контентом и системными настройками</p>
+        </div>
+        
+        <div class="admin-container fade-in">
+            <div class="admin-sections">
+                <div class="admin-section">
+                    <h3>Управление пользователями</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="showUserManagement()">Список пользователей</button>
+                        <button class="btn" onclick="showBannedUsers()">Заблокированные</button>
+                        <button class="btn" onclick="showMutedUsers()">Заглушенные</button>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Управление контентом</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="exportData()">Экспорт данных</button>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Системные настройки</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="showSystemLogs()">Системные логи</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Модальные окна -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
@@ -1469,6 +1477,7 @@
     <script src="./js/userProfile.js"></script>
     <script src="./js/forum.js"></script>
     <script src="./js/settings.js"></script>
+    <script src="./js/admin.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

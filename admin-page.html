@@ -1,0 +1,56 @@
+    <!-- Страница администрирования -->
+    <div class="page-content" id="admin-page">
+        <div class="page-header fade-in">
+            <h2>Chief Administrator Panel</h2>
+            <p>Управление пользователями, контентом и системными настройками</p>
+        </div>
+        
+        <div class="admin-container fade-in">
+            <div class="admin-stats">
+                <div class="admin-stat-card">
+                    <h4>Пользователи</h4>
+                    <p id="adminTotalUsers">2</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Темы</h4>
+                    <p id="adminTotalTopics">0</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Сообщения</h4>
+                    <p id="adminTotalPosts">0</p>
+                </div>
+                <div class="admin-stat-card">
+                    <h4>Заблокированные</h4>
+                    <p id="adminBannedUsers">0</p>
+                </div>
+            </div>
+            
+            <div class="admin-sections">
+                <div class="admin-section">
+                    <h3>Управление пользователями</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="showUserManagement()">Список пользователей</button>
+                        <button class="btn" onclick="showBannedUsers()">Заблокированные</button>
+                        <button class="btn" onclick="showMutedUsers()">Заглушенные</button>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Управление контентом</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="clearAllTopics()">Очистить все темы</button>
+                        <button class="btn" onclick="clearAllPosts()">Очистить все сообщения</button>
+                        <button class="btn" onclick="exportData()">Экспорт данных</button>
+                    </div>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Системные настройки</h3>
+                    <div class="admin-actions">
+                        <button class="btn" onclick="resetAllData()">Сброс всех данных</button>
+                        <button class="btn" onclick="showSystemLogs()">Системные логи</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -151,6 +151,13 @@ function initNavigation() {
                 }
             }
             
+            if (page === 'admin') {
+                if (!isLoggedIn || !currentUser || !currentUser.isAdmin) {
+                    showNotification('Нет доступа', 'У вас нет прав для доступа к панели администратора', 'error');
+                    return;
+                }
+            }
+            
             showPage(page);
         });
     });

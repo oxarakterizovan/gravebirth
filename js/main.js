@@ -269,6 +269,17 @@ function loadUserPosts() {
             } else {
                 showPage('forum');
             }
+        } else if (savedPage === 'category') {
+            // Восстанавливаем страницу категории
+            const savedCategory = localStorage.getItem('currentCategory');
+            if (savedCategory) {
+                showPage('category');
+                setTimeout(() => {
+                    filterByCategory(savedCategory);
+                }, 100);
+            } else {
+                showPage('forum');
+            }
         } else {
             showPage(savedPage);
         }

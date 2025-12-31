@@ -209,6 +209,7 @@ function updateUserUI() {
     const userControls = document.getElementById('user-controls');
     const authBtn = document.getElementById('authBtn');
     const adminSubtitle = document.getElementById('adminSubtitle');
+    const adminNavLink = document.getElementById('adminNavLink');
     
     if (!userControls) return;
     
@@ -218,6 +219,11 @@ function updateUserUI() {
         // Показываем подзаголовок только для администраторов
         if (adminSubtitle) {
             adminSubtitle.style.display = currentUser.isAdmin ? 'block' : 'none';
+        }
+        
+        // Показываем админ-ссылку только для администраторов
+        if (adminNavLink) {
+            adminNavLink.style.display = currentUser.isAdmin ? 'block' : 'none';
         }
         
         userControls.innerHTML = `
@@ -251,6 +257,11 @@ function updateUserUI() {
         // Скрываем подзаголовок для неавторизованных пользователей
         if (adminSubtitle) {
             adminSubtitle.style.display = 'none';
+        }
+        
+        // Скрываем админ-ссылку для неавторизованных пользователей
+        if (adminNavLink) {
+            adminNavLink.style.display = 'none';
         }
         
         userControls.innerHTML = '<button class="auth-btn" id="authBtn">Sign In</button>';

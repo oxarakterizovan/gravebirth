@@ -104,7 +104,7 @@ function openTopic(category, title) {
     document.getElementById('topicAuthorName').textContent = authorData.username;
     document.getElementById('topicAuthorName').onclick = () => viewUserProfile(authorData.username);
     document.getElementById('topicAuthorName').style.cursor = 'pointer';
-    document.getElementById('topicAuthorRole').textContent = authorData.isAdmin ? 'Administrator' : 'Member';
+    document.getElementById('topicAuthorRole').textContent = getUserRole(authorData);
     document.getElementById('topicAuthorReactions').textContent = authorData.reactions || 0;
     document.getElementById('topicAuthorTopics').textContent = authorData.topics || 0;
     document.getElementById('topicCreatedDate').textContent = topic.date;
@@ -123,7 +123,7 @@ function openTopic(category, title) {
     }
     
     const adminControls = document.getElementById('adminControls');
-    if (adminControls && currentUser && currentUser.isAdmin) {
+    if (adminControls && currentUser && hasModeratorRights(currentUser)) {
         adminControls.style.display = 'block';
         adminControls.innerHTML = `
             <button onclick="toggleTopicStatus('${category}', '${title}')" class="admin-btn" style="color: #000000;">
@@ -326,13 +326,27 @@ function initForum() {
     
     if (closeTopicModal) {
         closeTopicModal.addEventListener('click', () => {
-            if (createTopicModal) createTopicModal.classList.remove('active');
+            if (createTopicModal) {
+                createTopicModal.classList.remove('active');
+                // Возвращаем поле категории в нормальное состояние
+                const topicCategorySelect = document.getElementById('topicCategory');
+                if (topicCategorySelect) {
+                    topicCategorySelect.disabled = false;
+                }
+            }
         });
     }
     
     if (cancelTopicBtn) {
         cancelTopicBtn.addEventListener('click', () => {
-            if (createTopicModal) createTopicModal.classList.remove('active');
+            if (createTopicModal) {
+                createTopicModal.classList.remove('active');
+                // Возвращаем поле категории в нормальное состояние
+                const topicCategorySelect = document.getElementById('topicCategory');
+                if (topicCategorySelect) {
+                    topicCategorySelect.disabled = false;
+                }
+            }
         });
     }
     
@@ -415,6 +429,8 @@ function initForum() {
 function filterByCategory(category) {
     // Сохраняем текущую категорию
     currentTopicCategory = category;
+    localStorage.setItem('currentCategory', category);
+    localStorage.setItem('currentPage', 'category');
     
     // Переходим на отдельную страницу категорий
     showPage('category');
@@ -603,23 +619,71 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Обработчик для кнопки создания темы в категории
+    const createTopicBtnCategory = document.getElementById('createTopicBtnCategory');
+    if (createTopicBtnCategory) {
+        createTopicBtnCategory.addEventListener('click', () => {
+            if (!isLoggedIn) {
+                showNotification('Требуется вход', 'Пожалуйста, войдите в систему для создания тем', 'warning');
+                const loginModal = document.getElementById('loginModal');
+                if (loginModal) loginModal.classList.add('active');
+                return;
+            }
+            
+            const activeCategory = document.querySelector('#category-page .sidebar-category.active');
+            const currentCategory = activeCategory ? activeCategory.getAttribute('data-category') : null;
+            
+            if (currentCategory) {
+                openCreateTopicModal(currentCategory);
+            }
+        });
+    }
+    
+    // Обработчики для боковой панели категорий
+    const categorySidebarItems = document.querySelectorAll('#category-page .sidebar-category');
+    categorySidebarItems.forEach(category => {
+        category.addEventListener('click', () => {
+            const categoryId = category.getAttribute('data-category');
+            if (categoryId) {
+                filterByCategory(categoryId);
+            }
+        });
+    });
 });
 
 // Функция для возврата к категории
 function backToCategory() {
     // Очищаем сохраненную тему
     localStorage.removeItem('currentTopic');
-    localStorage.setItem('currentPage', 'forum');
     
     if (currentTopicCategory) {
+        localStorage.setItem('currentPage', 'category');
+        localStorage.setItem('currentCategory', currentTopicCategory);
         filterByCategory(currentTopicCategory);
     } else {
+        localStorage.setItem('currentPage', 'forum');
+        localStorage.removeItem('currentCategory');
         showPage('forum');
     }
 }
 
 // Делаем функцию глобально доступной
 window.backToCategory = backToCategory;
+
+// Функция для открытия модального окна создания темы с предустановленной категорией
+function openCreateTopicModal(category) {
+    const createTopicModal = document.getElementById('createTopicModal');
+    const topicCategorySelect = document.getElementById('topicCategory');
+    
+    if (createTopicModal && topicCategorySelect) {
+        // Устанавливаем категорию и делаем поле недоступным
+        topicCategorySelect.value = category;
+        topicCategorySelect.disabled = true;
+        
+        createTopicModal.classList.add('active');
+    }
+}
 
 // Административные функции
 function toggleTopicStatus(category, title) {

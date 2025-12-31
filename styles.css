@@ -2412,6 +2412,49 @@ body.dark-theme {
     margin: 15px 0;
 }
 
+/* Стили для методов двухфакторной аутентификации */
+.two-factor-methods {
+    margin-top: 20px;
+}
+
+.two-factor-method {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.method-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.telegram-setup {
+    margin-top: 15px;
+}
+
+.telegram-bot-info {
+    background: rgba(33, 150, 243, 0.1);
+    border: 1px solid var(--info-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.telegram-bot-info code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+#telegramConnected {
+    display: none;
+}
+
 .status-badge {
     display: inline-block;
     padding: 4px 10px;

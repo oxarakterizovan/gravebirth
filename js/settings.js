@@ -195,6 +195,90 @@ function loadSettings() {
 }
 
 function initSecurityTab() {
-    // Минимальная реализация для безопасности
-    console.log('Security tab initialized');
+    // Обработчики для двухфакторной аутентификации через Email
+    const emailAuthToggle = document.getElementById('emailAuthToggle');
+    const emailAuthSection = document.getElementById('emailAuthSection');
+    
+    if (emailAuthToggle && emailAuthSection) {
+        emailAuthToggle.addEventListener('change', function() {
+            if (this.checked) {
+                emailAuthSection.style.display = 'block';
+                showNotification('Email аутентификация', 'Аутентификация через email включена', 'success');
+                updateTwoFactorAlert();
+            } else {
+                emailAuthSection.style.display = 'none';
+                showNotification('Email аутентификация', 'Аутентификация через email отключена', 'info');
+                updateTwoFactorAlert();
+            }
+        });
+    }
+    
+    // Обработчики для двухфакторной аутентификации через Telegram
+    const telegramAuthToggle = document.getElementById('telegramAuthToggle');
+    const telegramAuthSection = document.getElementById('telegramAuthSection');
+    const saveTelegramBtn = document.getElementById('saveTelegramBtn');
+    const telegramConnected = document.getElementById('telegramConnected');
+    
+    if (telegramAuthToggle && telegramAuthSection) {
+        telegramAuthToggle.addEventListener('change', function() {
+            if (this.checked) {
+                telegramAuthSection.style.display = 'block';
+                updateTwoFactorAlert();
+            } else {
+                telegramAuthSection.style.display = 'none';
+                telegramConnected.style.display = 'none';
+                showNotification('Telegram аутентификация', 'Аутентификация через Telegram отключена', 'info');
+                updateTwoFactorAlert();
+            }
+        });
+    }
+    
+    if (saveTelegramBtn) {
+        saveTelegramBtn.addEventListener('click', function() {
+            const telegramUsername = document.getElementById('telegramUsernameInput').value.trim();
+            
+            if (!telegramUsername) {
+                showNotification('Ошибка', 'Введите Telegram username', 'error');
+                return;
+            }
+            
+            // Симуляция подключения к Telegram
+            setTimeout(() => {
+                const connectedTelegramDisplay = document.getElementById('connectedTelegramDisplay');
+                if (connectedTelegramDisplay) {
+                    connectedTelegramDisplay.textContent = `@${telegramUsername}`;
+                }
+                
+                telegramAuthSection.style.display = 'none';
+                telegramConnected.style.display = 'block';
+                
+                showNotification('Telegram подключен', `Аутентификация через @${telegramUsername} активирована`, 'success');
+                updateTwoFactorAlert();
+            }, 1500);
+        });
+    }
+    
+    // Генерируем случайный код подключения
+    const telegramConnectCode = document.getElementById('telegramConnectCode');
+    if (telegramConnectCode) {
+        const randomCode = 'GB-AUTH-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+        telegramConnectCode.textContent = randomCode;
+    }
+}
+
+function updateTwoFactorAlert() {
+    const emailAuthToggle = document.getElementById('emailAuthToggle');
+    const telegramAuthToggle = document.getElementById('telegramAuthToggle');
+    const twoFactorAlert = document.getElementById('twoFactorAlert');
+    
+    if (twoFactorAlert) {
+        const isEmailEnabled = emailAuthToggle && emailAuthToggle.checked;
+        const isTelegramEnabled = telegramAuthToggle && telegramAuthToggle.checked;
+        
+        if (isEmailEnabled || isTelegramEnabled) {
+            twoFactorAlert.style.display = 'block';
+        } else {
+            twoFactorAlert.style.display = 'none';
+        }
+    }
 }

@@ -386,75 +386,96 @@
                             </div>
                         </div>
                         
-                        <div class="two-factor-toggle" style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                            <div>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <i class="fas fa-mobile-alt" style="color: var(--warning-color);"></i>
-                                    <span style="font-weight: 600;">Двухфакторная аутентификация</span>
+                        <div class="two-factor-methods">
+                            <div class="two-factor-method">
+                                <div class="method-header">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <i class="fas fa-envelope" style="color: var(--info-color);"></i>
+                                        <span style="font-weight: 600;">Аутентификация через Email</span>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="emailAuthToggle">
+                                        <span class="slider"></span>
+                                    </label>
                                 </div>
                                 <small style="display: block; margin-top: 5px; color: var(--text-secondary);">
-                                    Добавить защиту с помощью телефона
+                                    Получать коды подтверждения на email
                                 </small>
-                            </div>
-                            <label class="switch">
-                                <input type="checkbox" id="twoFactorToggleMain">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div id="twoFactorPhoneSection" style="display: none;">
-                            <div class="current-info" style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                                <p><strong>Привязанный номер телефона:</strong></p>
-                                <p id="currentPhoneDisplay" style="color: var(--info-color); font-weight: 600; margin: 5px 0;">+7 (999) 123-45-67</p>
-                                <span class="status-badge" style="background: rgba(76,175,80,0.2); color: var(--success-color); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
-                                    АКТИВНО
-                                </span>
+                                
+                                <div id="emailAuthSection" style="display: none; margin-top: 15px;">
+                                    <div class="current-info">
+                                        <p><strong>Email для аутентификации:</strong></p>
+                                        <p id="authEmailDisplay" style="color: var(--info-color); font-weight: 600; margin: 5px 0;">admin@gravebirth.com</p>
+                                        <span class="status-badge" style="background: rgba(76,175,80,0.2); color: var(--success-color); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                            АКТИВНО
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="phone-setup" style="margin-top: 15px;">
-                                <div class="form-group">
-                                    <label for="phoneNumberInput">Номер телефона</label>
-                                    <div style="display: flex; gap: 10px; margin-top: 5px;">
-                                        <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; min-width: 60px; display: flex; align-items: center; justify-content: center;">
-                                            +7
-                                        </div>
-                                        <input type="tel" id="phoneNumberInput" 
-                                               placeholder="(999) 123-45-67" 
-                                               style="flex: 1;" 
-                                               pattern="[0-9]{10}">
+                            <div class="two-factor-method" style="margin-top: 20px;">
+                                <div class="method-header">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <i class="fab fa-telegram" style="color: var(--info-color);"></i>
+                                        <span style="font-weight: 600;">Аутентификация через Telegram</span>
                                     </div>
-                                    <small>Номер будет использоваться только для аутентификации</small>
+                                    <label class="switch">
+                                        <input type="checkbox" id="telegramAuthToggle">
+                                        <span class="slider"></span>
+                                    </label>
                                 </div>
+                                <small style="display: block; margin-top: 5px; color: var(--text-secondary);">
+                                    Получать коды подтверждения в Telegram
+                                </small>
                                 
-                                <div id="verificationCodeSection" style="display: none; margin-top: 15px;">
-                                    <div class="form-group">
-                                        <label>Код подтверждения</label>
-                                        <div style="display: flex; gap: 10px; margin: 10px 0;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
-                                            <input type="text" class="code-digit" maxlength="1" style="width: 40px; height: 50px; text-align: center; font-size: 1.2rem;">
+                                <div id="telegramAuthSection" style="display: none; margin-top: 15px;">
+                                    <div class="telegram-setup">
+                                        <div class="form-group">
+                                            <label for="telegramUsernameInput">Telegram Username</label>
+                                            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                                <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 15px; min-width: 30px; display: flex; align-items: center; justify-content: center;">
+                                                    @
+                                                </div>
+                                                <input type="text" id="telegramUsernameInput" 
+                                                       placeholder="username" 
+                                                       style="flex: 1;">
+                                            </div>
+                                            <small>Введите ваш Telegram username без @</small>
                                         </div>
-                                        <small>Введите 6-значный код, отправленный на ваш телефон</small>
+                                        
+                                        <div class="telegram-bot-info" style="background: rgba(33,150,243,0.1); border: 1px solid var(--info-color); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                                <i class="fas fa-robot" style="color: var(--info-color);"></i>
+                                                <strong>Подключение к боту</strong>
+                                            </div>
+                                            <p style="margin: 5px 0;">1. Найдите бота <strong>@GravebirthAuthBot</strong> в Telegram</p>
+                                            <p style="margin: 5px 0;">2. Отправьте команду <code>/start</code></p>
+                                            <p style="margin: 5px 0;">3. Введите код подключения: <strong id="telegramConnectCode">GB-AUTH-2025</strong></p>
+                                        </div>
+                                        
+                                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                            <button type="button" class="btn" id="saveTelegramBtn">
+                                                <i class="fab fa-telegram"></i> Подключить Telegram
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                                    <button type="button" class="btn" id="savePhoneBtnMain">
-                                        <i class="fas fa-check"></i> Сохранить номер
-                                    </button>
-                                    <button type="button" class="btn btn-success" id="verifyCodeBtnMain" style="display: none;">
-                                        <i class="fas fa-check-circle"></i> Подтвердить код
-                                    </button>
+                                    
+                                    <div id="telegramConnected" style="display: none;">
+                                        <div class="current-info">
+                                            <p><strong>Подключенный Telegram:</strong></p>
+                                            <p id="connectedTelegramDisplay" style="color: var(--info-color); font-weight: 600; margin: 5px 0;">@username</p>
+                                            <span class="status-badge" style="background: rgba(76,175,80,0.2); color: var(--success-color); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                                ПОДКЛЮЧЕНО
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="security-alert" id="twoFactorAlert" style="display: none; background: rgba(33,150,243,0.1); border: 1px solid var(--info-color); border-radius: 8px; padding: 15px; margin-top: 15px;">
                             <i class="fas fa-info-circle" style="color: var(--info-color); margin-right: 10px;"></i>
-                            <span>Двухфакторная аутентификация включена. При входе потребуется вводить код из приложения или SMS.</span>
+                            <span>Двухфакторная аутентификация включена. При входе потребуется вводить код подтверждения.</span>
                         </div>
                     </div>
                 </div>

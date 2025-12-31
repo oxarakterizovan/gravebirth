@@ -36,6 +36,10 @@ function showNotification(title, message, type = 'info', duration = 5000) {
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.addEventListener('click', () => removeNotification(notification));
     
+    // Добавляем возможность закрытия по клику на уведомление
+    notification.addEventListener('click', () => removeNotification(notification));
+    notification.style.cursor = 'pointer';
+    
     if (duration > 0) {
         setTimeout(() => removeNotification(notification), duration);
     }

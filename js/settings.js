@@ -205,6 +205,8 @@ function initSecurityTab() {
         telegramAuthToggle.addEventListener('change', function() {
             if (this.checked) {
                 telegramAuthSection.style.display = 'block';
+                // Генерируем новый код при включении
+                generateTelegramCode();
             } else {
                 telegramAuthSection.style.display = 'none';
                 telegramConnected.style.display = 'none';
@@ -238,32 +240,26 @@ function initSecurityTab() {
         });
     }
     
-    // Генерируем уникальный код подключения для каждого пользователя
-    const telegramConnectCode = document.getElementById('telegramConnectCode');
-    if (telegramConnectCode) {
-        let userCode = localStorage.getItem('telegramConnectCode');
-        if (!userCode) {
-            const timestamp = Date.now().toString(36).toUpperCase();
-            const randomPart = Math.random().toString(36).substr(2, 4).toUpperCase();
-            const userPart = currentUser ? currentUser.username.substr(0, 2).toUpperCase() : 'GB';
-            userCode = `${userPart}-${timestamp}-${randomPart}`;
-            localStorage.setItem('telegramConnectCode', userCode);
-        }
-        telegramConnectCode.textContent = userCode;
-    }
-    
-    // Обработчик для генерации нового кода
-    const generateNewCodeBtn = document.getElementById('generateNewCodeBtn');
-    if (generateNewCodeBtn && telegramConnectCode) {
-        generateNewCodeBtn.addEventListener('click', function() {
+    // Функция генерации кода Telegram
+    function generateTelegramCode() {
+        const telegramConnectCode = document.getElementById('telegramConnectCode');
+        if (telegramConnectCode) {
             const timestamp = Date.now().toString(36).toUpperCase();
             const randomPart = Math.random().toString(36).substr(2, 4).toUpperCase();
             const userPart = currentUser ? currentUser.username.substr(0, 2).toUpperCase() : 'GB';
             const newCode = `${userPart}-${timestamp}-${randomPart}`;
-            
-            localStorage.setItem('telegramConnectCode', newCode);
             telegramConnectCode.textContent = newCode;
-            
+        }
+    }
+    
+    // Генерируем код при инициализации
+    generateTelegramCode();
+    
+    // Обработчик для генерации нового кода
+    const generateNewCodeBtn = document.getElementById('generateNewCodeBtn');
+    if (generateNewCodeBtn) {
+        generateNewCodeBtn.addEventListener('click', function() {
+            generateTelegramCode();
             showNotification('Новый код', 'Код подключения обновлён', 'success');
         });
     }

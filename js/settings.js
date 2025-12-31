@@ -195,23 +195,6 @@ function loadSettings() {
 }
 
 function initSecurityTab() {
-    // Обработчики для двухфакторной аутентификации через Email
-    const emailAuthToggle = document.getElementById('emailAuthToggle');
-    const emailAuthSection = document.getElementById('emailAuthSection');
-    
-    if (emailAuthToggle && emailAuthSection) {
-        emailAuthToggle.addEventListener('change', function() {
-            if (this.checked) {
-                emailAuthSection.style.display = 'block';
-                showNotification('Email аутентификация', 'Аутентификация через email включена', 'success');
-            } else {
-                emailAuthSection.style.display = 'none';
-                showNotification('Email аутентификация', 'Аутентификация через email отключена', 'info');
-            }
-            updateTwoFactorAlert();
-        });
-    }
-    
     // Обработчики для двухфакторной аутентификации через Telegram
     const telegramAuthToggle = document.getElementById('telegramAuthToggle');
     const telegramAuthSection = document.getElementById('telegramAuthSection');
@@ -264,15 +247,13 @@ function initSecurityTab() {
 }
 
 function updateTwoFactorAlert() {
-    const emailAuthToggle = document.getElementById('emailAuthToggle');
     const telegramAuthToggle = document.getElementById('telegramAuthToggle');
     const twoFactorAlert = document.getElementById('twoFactorAlert');
     
     if (twoFactorAlert) {
-        const isEmailEnabled = emailAuthToggle && emailAuthToggle.checked;
         const isTelegramEnabled = telegramAuthToggle && telegramAuthToggle.checked;
         
-        if (isEmailEnabled || isTelegramEnabled) {
+        if (isTelegramEnabled) {
             twoFactorAlert.style.display = 'block';
         } else {
             twoFactorAlert.style.display = 'none';

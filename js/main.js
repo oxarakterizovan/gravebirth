@@ -259,8 +259,8 @@ function loadUserPosts() {
     }
     
     // Загружаем посты если пользователь вошел и находится на странице профиля
-    const savedPage = localStorage.getItem('currentPage') || 'home';
-    if (isLoggedIn && savedPage === 'profile') {
+    const currentPage = localStorage.getItem('currentPage') || 'home';
+    if (isLoggedIn && currentPage === 'profile') {
         setTimeout(() => loadUserPosts(), 100);
     }
     

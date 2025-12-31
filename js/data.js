@@ -109,6 +109,108 @@ const demoUsers = [
         }
     },
     { 
+        username: 'TechAdmin', 
+        email: 'tech@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'TA',
+        regDate: '20 Янв 2025',
+        messages: 8,
+        reactions: 25,
+        topics: 5,
+        replies: 18,
+        status: 'Online',
+        loginCount: 45,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#234567',
+        isAdmin: false,
+        role: 'tech-admin'
+    },
+    { 
+        username: 'SeniorMod', 
+        email: 'srmod@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'SM',
+        regDate: '18 Янв 2025',
+        messages: 12,
+        reactions: 35,
+        topics: 7,
+        replies: 28,
+        status: 'Online',
+        loginCount: 67,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#345678',
+        isAdmin: false,
+        role: 'st-moderator'
+    },
+    { 
+        username: 'ModeratorUser', 
+        email: 'mod@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'MU',
+        regDate: '15 Янв 2025',
+        messages: 6,
+        reactions: 18,
+        topics: 3,
+        replies: 15,
+        status: 'Online',
+        loginCount: 32,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#456789',
+        isAdmin: false,
+        role: 'moderator'
+    },
+    { 
+        username: 'MediaManager', 
+        email: 'media@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'MM',
+        regDate: '12 Янв 2025',
+        messages: 4,
+        reactions: 12,
+        topics: 2,
+        replies: 8,
+        status: 'Online',
+        loginCount: 28,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#567890',
+        isAdmin: false,
+        role: 'media'
+    },
+    { 
+        username: 'SupportHelper', 
+        email: 'support@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'SH',
+        regDate: '10 Янв 2025',
+        messages: 3,
+        reactions: 8,
+        topics: 1,
+        replies: 5,
+        status: 'Online',
+        loginCount: 15,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#678901',
+        isAdmin: false,
+        role: 'support'
+    },
+    { 
+        username: 'HelperUser', 
+        email: 'helper@gravebirth.com', 
+        password: 'password123', 
+        avatar: 'HU',
+        regDate: '8 Янв 2025',
+        messages: 2,
+        reactions: 5,
+        topics: 1,
+        replies: 3,
+        status: 'Online',
+        loginCount: 12,
+        lastLogin: new Date().toLocaleString(),
+        userId: '#789012',
+        isAdmin: false,
+        role: 'helper'
+    },
+    { 
         username: 'dev_user', 
         email: 'dev@example.com', 
         password: 'password123', 
@@ -121,8 +223,9 @@ const demoUsers = [
         status: 'Online',
         loginCount: 89,
         lastLogin: new Date().toLocaleString(),
-        userId: '#789012',
+        userId: '#890123',
         isAdmin: false,
+        role: 'member',
         privacy: {
             profile: 'friends',
             posts: 'friends',
@@ -175,7 +278,9 @@ const pages = {
     'profile': document.getElementById('profile-page'),
     'topic-view': document.getElementById('topic-view-page'),
     'category': document.getElementById('category-page'),
-    'admin': document.getElementById('admin-page')
+    'admin': document.getElementById('admin-page'),
+    'tickets': document.getElementById('tickets-page'),
+    'support': document.getElementById('support-page')
 };
 
 // Функция для получения названия роли
@@ -189,13 +294,32 @@ function getUserRole(user) {
         'moderator': 'Moderator',
         'media': 'Media',
         'support': 'Support',
-        'helper': 'Helper'
+        'helper': 'Helper',
+        'member': 'Member'
     };
     
     return roles[user.role] || (user.isAdmin ? 'Administrator' : 'Member');
 }
 
+// Система прав доступа
+const permissions = {
+    'chief-admin': ['mute', 'unmute', 'ban', 'unban', 'view_logs', 'view_users', 'admin_questions', 'immunity'],
+    'tech-admin': ['mute', 'unmute', 'ban', 'unban', 'view_logs', 'view_users', 'immunity'],
+    'st-moderator': ['mute', 'unmute', 'ban', 'unban', 'immunity'],
+    'moderator': ['mute', 'unmute', 'ban', 'unban', 'immunity'],
+    'media': ['immunity'],
+    'support': ['admin_questions', 'view_banned', 'view_muted', 'view_users', 'tech_support'],
+    'helper': ['mute', 'unmute', 'tech_support'],
+    'member': []
+};
+
 // Проверка прав доступа
+function hasPermission(user, permission) {
+    if (!user || !user.role) return false;
+    const userPermissions = permissions[user.role] || [];
+    return userPermissions.includes(permission);
+}
+
 function hasAdminRights(user) {
     if (!user) return false;
     return user.role === 'chief-admin' || user.role === 'tech-admin' || user.isAdmin;
@@ -204,4 +328,14 @@ function hasAdminRights(user) {
 function hasModeratorRights(user) {
     if (!user) return false;
     return hasAdminRights(user) || user.role === 'st-moderator' || user.role === 'moderator';
+}
+
+function canAccessTechSupport(user) {
+    if (!user) return false;
+    return hasPermission(user, 'tech_support') || hasAdminRights(user) || hasModeratorRights(user);
+}
+
+function canBeMuted(user) {
+    if (!user) return true;
+    return !hasPermission(user, 'immunity');
 }

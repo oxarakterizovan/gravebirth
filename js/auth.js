@@ -95,6 +95,20 @@ function completeLogin(user, rememberMe) {
 
 // Инициализация обработчиков форм
 function initAuthForms() {
+    // Обработчик для кнопки "Показать пароль"
+    const showPasswordCheckbox = document.getElementById('showPassword');
+    const loginPasswordInput = document.getElementById('loginPassword');
+    
+    if (showPasswordCheckbox && loginPasswordInput) {
+        showPasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                loginPasswordInput.type = 'text';
+            } else {
+                loginPasswordInput.type = 'password';
+            }
+        });
+    }
+    
     // Форма входа
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -221,9 +235,15 @@ function updateUserUI() {
             adminSubtitle.style.display = currentUser.isAdmin ? 'block' : 'none';
         }
         
-        // Показываем админ-ссылку только для администраторов
+        // Показываем ссылку на техподдержку
+        const supportNavLink = document.getElementById('supportNavLink');
+        if (supportNavLink) {
+            supportNavLink.style.display = canAccessTechSupport(currentUser) ? 'block' : 'none';
+        }
+        
+        // Показываем админ-ссылку для пользователей с правами
         if (adminNavLink) {
-            adminNavLink.style.display = currentUser.isAdmin ? 'block' : 'none';
+            adminNavLink.style.display = canAccessAdminPanel(currentUser) ? 'block' : 'none';
         }
         
         userControls.innerHTML = `

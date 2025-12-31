@@ -70,6 +70,10 @@ function showPage(pageId) {
         initSettingsTabs();
     } else if (pageId === 'profile') {
         loadUserPosts();
+    } else if (pageId === 'support') {
+        initTechSupport();
+    } else if (pageId === 'tickets') {
+        initTicketForm();
     }
 }
 
@@ -152,10 +156,11 @@ function initNavigation() {
             }
             
             if (page === 'admin') {
-                if (!isLoggedIn || !currentUser || !currentUser.isAdmin) {
+                if (!isLoggedIn || !currentUser || !canAccessAdminPanel(currentUser)) {
                     showNotification('Нет доступа', 'У вас нет прав для доступа к панели администратора', 'error');
                     return;
                 }
+                showAdminMain();
             }
             
             showPage(page);

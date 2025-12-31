@@ -28,6 +28,8 @@
                 <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
                 <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                 <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
+                <li><a href="#" class="nav-link" data-page="tickets">Submit Ticket</a></li>
+                <li><a href="#" class="nav-link" data-page="support" id="supportNavLink" style="display: none;">Technical Support</a></li>
                 <li><a href="#" class="nav-link" data-page="admin" id="adminNavLink" style="display: none;">Admin</a></li>
                 <li id="user-controls">
                     <button class="auth-btn" id="authBtn">Sign In</button>
@@ -1100,6 +1102,130 @@
         </div>
     </div>
 
+    <!-- Страница подачи тикетов -->
+    <div class="page-content" id="tickets-page">
+        <div class="page-header fade-in">
+            <h2><i class="fas fa-life-ring"></i> Подача тикета в техническую поддержку</h2>
+            <p>Опишите вашу проблему, и наша команда поддержки поможет вам её решить</p>
+        </div>
+        
+        <div class="ticket-form-container fade-in">
+            <form class="ticket-form" id="ticketForm">
+                <div class="form-group">
+                    <label for="ticketCategory">Категория проблемы:</label>
+                    <select id="ticketCategory" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="account">Проблемы с аккаунтом</option>
+                        <option value="profile">Настройки профиля</option>
+                        <option value="forum">Проблемы с форумом</option>
+                        <option value="role_request">Запрос на должность</option>
+                        <option value="performance">Производительность сайта</option>
+                        <option value="bug_report">Сообщение об ошибке</option>
+                        <option value="feature_request">Предложение функции</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ticketPriority">Приоритет:</label>
+                    <select id="ticketPriority" required>
+                        <option value="low">Низкий - Общие вопросы</option>
+                        <option value="medium" selected>Средний - Стандартные проблемы</option>
+                        <option value="high">Высокий - Критические проблемы</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ticketTitle">Заголовок проблемы:</label>
+                    <input type="text" id="ticketTitle" placeholder="Кратко опишите суть проблемы" required maxlength="100">
+                    <small>Максимум 100 символов</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ticketDescription">Подробное описание:</label>
+                    <textarea id="ticketDescription" rows="6" placeholder="Опишите проблему максимально подробно. Укажите шаги для воспроизведения, если это применимо." required></textarea>
+                    <small>Чем подробнее описание, тем быстрее мы сможем помочь</small>
+                </div>
+                
+                <div class="quick-templates">
+                    <h4>Быстрые шаблоны:</h4>
+                    <div class="template-buttons">
+                        <button type="button" class="template-btn" onclick="useTemplate('login')">
+                            <i class="fas fa-sign-in-alt"></i> Не могу войти в аккаунт
+                        </button>
+                        <button type="button" class="template-btn" onclick="useTemplate('role')">
+                            <i class="fas fa-user-tie"></i> Запрос на должность
+                        </button>
+                        <button type="button" class="template-btn" onclick="useTemplate('profile')">
+                            <i class="fas fa-user-cog"></i> Проблемы с профилем
+                        </button>
+                        <button type="button" class="template-btn" onclick="useTemplate('bug')">
+                            <i class="fas fa-bug"></i> Сообщить об ошибке
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="clearTicketForm()">Очистить форму</button>
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Отправить тикет</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Страница технической поддержки -->
+    <div class="page-content" id="support-page">
+        <div class="page-header fade-in">
+            <h2><i class="fas fa-headset"></i> Technical Support</h2>
+            <p>Система управления тикетами и технической поддержки</p>
+        </div>
+        
+        <div class="support-container fade-in">
+            <div class="support-stats">
+                <div class="stat-card">
+                    <i class="fas fa-ticket-alt"></i>
+                    <div class="stat-info">
+                        <h3 id="totalTickets">12</h3>
+                        <p>Всего тикетов</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-info">
+                        <h3 id="pendingTickets">3</h3>
+                        <p>На рассмотрении</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="resolvedTickets">8</h3>
+                        <p>Решено</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-times-circle"></i>
+                    <div class="stat-info">
+                        <h3 id="rejectedTickets">1</h3>
+                        <p>Отказано</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="support-actions">
+                <button class="btn" onclick="showAllTickets()"><i class="fas fa-list"></i> Все тикеты</button>
+                <button class="btn btn-warning" onclick="showPendingTickets()"><i class="fas fa-clock"></i> На рассмотрении</button>
+                <button class="btn btn-success" onclick="showResolvedTickets()"><i class="fas fa-check"></i> Решенные</button>
+                <button class="btn btn-danger" onclick="showRejectedTickets()"><i class="fas fa-times"></i> Отказанные</button>
+                <button class="btn btn-info" onclick="showActiveChats()"><i class="fas fa-comments"></i> Активные чаты</button>
+            </div>
+            
+            <div class="tickets-container" id="ticketsContainer">
+                <!-- Тикеты будут загружены здесь -->
+            </div>
+        </div>
+    </div>
+
     <!-- Модальные окна -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
@@ -1477,6 +1603,9 @@
     <script src="./js/userProfile.js"></script>
     <script src="./js/forum.js"></script>
     <script src="./js/settings.js"></script>
+    <script src="./js/roleManager.js"></script>
+    <script src="./js/ticketSubmission.js"></script>
+    <script src="./js/techSupport.js"></script>
     <script src="./js/admin.js"></script>
     <script src="./js/main.js"></script>
 </body>

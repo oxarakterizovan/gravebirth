@@ -238,11 +238,34 @@ function initSecurityTab() {
         });
     }
     
-    // Генерируем случайный код подключения
+    // Генерируем уникальный код подключения для каждого пользователя
     const telegramConnectCode = document.getElementById('telegramConnectCode');
     if (telegramConnectCode) {
-        const randomCode = 'GB-AUTH-' + Math.random().toString(36).substr(2, 4).toUpperCase();
-        telegramConnectCode.textContent = randomCode;
+        let userCode = localStorage.getItem('telegramConnectCode');
+        if (!userCode) {
+            const timestamp = Date.now().toString(36).toUpperCase();
+            const randomPart = Math.random().toString(36).substr(2, 4).toUpperCase();
+            const userPart = currentUser ? currentUser.username.substr(0, 2).toUpperCase() : 'GB';
+            userCode = `${userPart}-${timestamp}-${randomPart}`;
+            localStorage.setItem('telegramConnectCode', userCode);
+        }
+        telegramConnectCode.textContent = userCode;
+    }
+    
+    // Обработчик для генерации нового кода
+    const generateNewCodeBtn = document.getElementById('generateNewCodeBtn');
+    if (generateNewCodeBtn && telegramConnectCode) {
+        generateNewCodeBtn.addEventListener('click', function() {
+            const timestamp = Date.now().toString(36).toUpperCase();
+            const randomPart = Math.random().toString(36).substr(2, 4).toUpperCase();
+            const userPart = currentUser ? currentUser.username.substr(0, 2).toUpperCase() : 'GB';
+            const newCode = `${userPart}-${timestamp}-${randomPart}`;
+            
+            localStorage.setItem('telegramConnectCode', newCode);
+            telegramConnectCode.textContent = newCode;
+            
+            showNotification('Новый код', 'Код подключения обновлён', 'success');
+        });
     }
 }
 

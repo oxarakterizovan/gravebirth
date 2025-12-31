@@ -37,22 +37,22 @@ const gameItems = {
         hasAnswers: true,
         isAdminOnly: false
     }],
-    'item-core': [{
-        title: "Core Item Builds Meta",
+    'character-builds': [{
+        title: "Shadow Assassin - Character Build",
         author: "ItemExpert",
         date: "5 hours ago",
-        content: `# Core Item Builds - Current Meta\n\n## Damage Dealers\n- **Desolator** - Armor reduction\n- **Butterfly** - Evasion and damage\n- **Satanic** - Lifesteal\n\n## Initiators\n- **Blink Dagger** - Positioning\n- **Black King Bar** - Magic immunity\n- **Pipe of Insight** - Magic resistance`,
+        content: `# Shadow Assassin - Character Build\n\n## Overview\nShadow Assassin is a versatile damage dealer with excellent mobility and burst potential.\n\n## Core Items\n- **Desolator** - Armor reduction\n- **Butterfly** - Evasion and damage\n- **Satanic** - Lifesteal\n\n## Skill Build\n1. Shadow Strike (Q) - Max first\n2. Blink (W) - One point early\n3. Critical Strike (E) - Max second\n4. Requiem (R) - Ultimate`,
         replies: 8,
         views: 156,
         isPopular: false,
         hasAnswers: false,
         isAdminOnly: false
     }],
-    'item-support': [{
-        title: "Support Item Priority",
+    'item-builds': [{
+        title: "Crystal Maiden - Item Builds",
         author: "WardMaster",
         date: "6 hours ago",
-        content: `# Support Item Guide\n\n## Essential Items\n- **Observer Wards** - Vision control\n- **Sentry Wards** - Counter invisibility\n- **Force Staff** - Team mobility\n\n## Luxury Items\n- **Glimmer Cape** - Magic resistance\n- **Ghost Scepter** - Physical immunity`,
+        content: `# Crystal Maiden - Item Builds\n\n## Essential Items\n- **Observer Wards** - Vision control\n- **Sentry Wards** - Counter invisibility\n- **Force Staff** - Team mobility\n\n## Luxury Items\n- **Glimmer Cape** - Magic resistance\n- **Ghost Scepter** - Physical immunity`,
         replies: 5,
         views: 98,
         isPopular: false,
@@ -172,5 +172,6 @@ const pages = {
     'forum': document.getElementById('forum-page'),
     'settings': document.getElementById('settings-page'),
     'profile': document.getElementById('profile-page'),
-    'topic-view': document.getElementById('topic-view-page')
+    'topic-view': document.getElementById('topic-view-page'),
+    'category': document.getElementById('category-page')
 };

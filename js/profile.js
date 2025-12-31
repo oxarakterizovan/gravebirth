@@ -24,6 +24,12 @@ function saveCurrentUser() {
     if (currentUser) {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         saveUserData(currentUser.username, currentUser);
+        
+        // Обновляем данные в массиве demoUsers
+        const demoUserIndex = demoUsers.findIndex(u => u.username === currentUser.username);
+        if (demoUserIndex !== -1) {
+            demoUsers[demoUserIndex] = { ...currentUser };
+        }
     }
 }
 
@@ -33,6 +39,7 @@ function updateProfileData() {
     const elements = {
         'profileAvatar': document.getElementById('profileAvatar'),
         'profileUsername': document.getElementById('profileUsername'),
+        'profileRole': document.getElementById('profileRole'),
         'profileRegDate': document.getElementById('profileRegDate'),
         'profileStatus': document.getElementById('profileStatus'),
         'profileMessages': document.getElementById('profileMessages'),
@@ -60,6 +67,9 @@ function updateProfileData() {
             case 'profileUsername':
             case 'infoUsername':
                 element.textContent = currentUser.username;
+                break;
+            case 'profileRole':
+                element.textContent = currentUser.isAdmin ? 'DEVELOPER HOST MANAGER' : '';
                 break;
             case 'profileRegDate':
                 element.textContent = currentUser.regDate;
@@ -111,6 +121,7 @@ function addToAvatarHistory(avatarData) {
         currentUser.avatarHistory = currentUser.avatarHistory.slice(0, 6);
     }
     
+    // Сохраняем сразу после добавления
     saveCurrentUser();
 }
 

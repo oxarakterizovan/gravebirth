@@ -270,7 +270,14 @@ function updateUserUI() {
 
 function logout() {
     if (currentUser) {
+        // Сохраняем данные пользователя включая историю аватаров
         saveUserData(currentUser.username, currentUser);
+        
+        // Обновляем данные в массиве demoUsers
+        const demoUserIndex = demoUsers.findIndex(u => u.username === currentUser.username);
+        if (demoUserIndex !== -1) {
+            demoUsers[demoUserIndex] = { ...currentUser };
+        }
     }
     
     isLoggedIn = false;

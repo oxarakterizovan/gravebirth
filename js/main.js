@@ -81,7 +81,7 @@ function loadUserPosts() {
         postElement.className = 'post fade-in';
         postElement.innerHTML = `
             <div class="post-header">
-                <div class="post-author" onclick="showPage('profile')" style="cursor: pointer;">
+                <div class="post-author" onclick="viewUserProfile('${postData.author}')" style="cursor: pointer;">
                     <div class="user-avatar ${postData.avatarImage ? 'avatar-with-image' : ''}" 
                          style="${postData.avatarImage ? `background-image: url('${postData.avatarImage}')` : ''}">
                         ${postData.avatarImage ? '' : postData.avatar}
@@ -259,6 +259,7 @@ function loadUserPosts() {
     }
     
     // Загружаем посты если пользователь вошел и находится на странице профиля
+    const savedPage = localStorage.getItem('currentPage') || 'home';
     if (isLoggedIn && savedPage === 'profile') {
         setTimeout(() => loadUserPosts(), 100);
     }

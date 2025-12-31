@@ -210,6 +210,7 @@ function initSecurityTab() {
             } else {
                 telegramAuthSection.style.display = 'none';
                 telegramConnected.style.display = 'none';
+                showNotification('Telegram аутентификация', 'Аутентификация через Telegram отключена', 'info');
             }
             updateTwoFactorAlert();
         });
@@ -275,10 +276,6 @@ function updateTwoFactorAlert() {
             twoFactorAlert.style.display = 'block';
         } else {
             twoFactorAlert.style.display = 'none';
-            // Показываем уведомление только если аутентификатор был выключен
-            if (telegramAuthToggle && !telegramAuthToggle.checked) {
-                showNotification('Telegram аутентификация', 'Аутентификация через Telegram отключена', 'info');
-            }
         }
     }
 }

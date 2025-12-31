@@ -3385,7 +3385,7 @@ body.dark-theme {
 .topic-view-content .topic-category {
     display: inline-block;
     background: var(--accent-color);
-    color: white;
+    color: #000000;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -3473,4 +3473,65 @@ body.dark-theme {
     transform: translateY(-50%);
     color: var(--text-secondary);
     pointer-events: none;
+}
+/* Админские кнопки */
+.admin-btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    background: var(--accent-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.admin-btn:hover {
+    opacity: 0.8;
+}
+
+.admin-btn.delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.admin-btn.mute {
+    background: #f39c12;
+    color: white;
+}
+
+.admin-btn.ban {
+    background: #c0392b;
+    color: white;
+}
+
+/* Статус закрытой темы */
+.topic-closed {
+    color: #e74c3c;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-closed {
+    background: #e74c3c !important;
+    color: white !important;
+}
+
+#adminControls {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-color);
+}
+
+#topicStatus {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 6px;
+    border-left: 3px solid #e74c3c;
 }

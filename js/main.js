@@ -249,9 +249,25 @@ function loadUserPosts() {
             if (parts.length === 2) {
                 const category = parts[0];
                 const title = decodeURIComponent(parts[1]);
+                showPage('topic-view');
                 setTimeout(() => {
                     openTopic(category, title);
                 }, 500);
+            }
+        } else if (savedPage === 'topic-view') {
+            // Если сохранена страница просмотра темы
+            const savedTopic = localStorage.getItem('currentTopic');
+            if (savedTopic) {
+                try {
+                    const {category, title} = JSON.parse(savedTopic);
+                    showPage('topic-view');
+                    openTopic(category, title);
+                } catch (e) {
+                    localStorage.removeItem('currentTopic');
+                    showPage('forum');
+                }
+            } else {
+                showPage('forum');
             }
         } else {
             showPage(savedPage);

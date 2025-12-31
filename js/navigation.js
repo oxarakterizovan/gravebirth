@@ -61,7 +61,10 @@ function showPage(pageId) {
     window.scrollTo(0, 0);
     
     if (pageId === 'forum') {
-        initForum();
+        if (!window.forumInitialized) {
+            initForum();
+            window.forumInitialized = true;
+        }
     } else if (pageId === 'settings') {
         loadSettings();
         initSettingsTabs();

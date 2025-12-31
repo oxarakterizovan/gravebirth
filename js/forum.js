@@ -47,10 +47,12 @@ function getCategoryName(category) {
 }
 
 function openTopic(category, title) {
-    // Сохраняем текущую категорию
     currentTopicCategory = category;
     
-    // Показываем/скрываем кнопку Back to category
+    // Сохраняем текущую тему в localStorage
+    localStorage.setItem('currentTopic', JSON.stringify({category, title}));
+    localStorage.setItem('currentPage', 'topic-view');
+    
     const backToCategoryBtn = document.getElementById('backToCategoryBtn');
     if (backToCategoryBtn) {
         backToCategoryBtn.style.display = 'block';
@@ -64,7 +66,8 @@ function openTopic(category, title) {
             topic = {
                 ...demoTopic,
                 category: category,
-                tags: []
+                tags: [],
+                closed: false
             };
         }
     }
@@ -82,7 +85,6 @@ function openTopic(category, title) {
     
     let authorData = demoUsers.find(u => u.username === topic.author);
     
-    // Загружаем сохраненные данные автора
     const savedAuthorData = loadUserData(topic.author);
     if (savedAuthorData) {
         authorData = savedAuthorData;
@@ -109,6 +111,37 @@ function openTopic(category, title) {
     
     document.getElementById('topicViewCategory').textContent = getCategoryName(topic.category);
     document.getElementById('topicViewTitle').textContent = topic.title;
+    
+    const topicStatus = document.getElementById('topicStatus');
+    if (topicStatus) {
+        if (topic.closed) {
+            topicStatus.innerHTML = '<span class="topic-closed"><i class="fas fa-lock"></i> Тема закрыта</span>';
+            topicStatus.style.display = 'block';
+        } else {
+            topicStatus.style.display = 'none';
+        }
+    }
+    
+    const adminControls = document.getElementById('adminControls');
+    if (adminControls && currentUser && currentUser.isAdmin) {
+        adminControls.style.display = 'block';
+        adminControls.innerHTML = `
+            <button onclick="toggleTopicStatus('${category}', '${title}')" class="admin-btn" style="color: #000000;">
+                <i class="fas fa-${topic.closed ? 'unlock' : 'lock'}"></i> ${topic.closed ? 'Открыть' : 'Закрыть'}
+            </button>
+            <button onclick="deleteTopic('${category}', '${title}')" class="admin-btn delete">
+                <i class="fas fa-trash"></i> Удалить
+            </button>
+            <button onclick="muteUser('${topic.author}')" class="admin-btn mute">
+                <i class="fas fa-volume-mute"></i> Мут
+            </button>
+            <button onclick="banUser('${topic.author}')" class="admin-btn ban">
+                <i class="fas fa-ban"></i> Бан
+            </button>
+        `;
+    } else if (adminControls) {
+        adminControls.style.display = 'none';
+    }
     
     let tagsHtml = '';
     if (topic.tags && topic.tags.length > 0) {
@@ -317,7 +350,8 @@ function initForum() {
         });
     });
     
-    if (createTopicForm) {
+    if (createTopicForm && !createTopicForm.hasAttribute('data-initialized')) {
+        createTopicForm.setAttribute('data-initialized', 'true');
         createTopicForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -342,7 +376,8 @@ function initForum() {
                 date: new Date().toLocaleDateString('ru-RU'),
                 views: 0,
                 replies: 0,
-                tags: selectedTags
+                tags: selectedTags,
+                closed: false
             };
             
             userTopics.push(newTopic);
@@ -362,6 +397,19 @@ function initForum() {
     
     loadForumTopics();
     updateForumStats();
+    
+    // Восстанавливаем текущую тему после загрузки данных
+    const savedTopic = localStorage.getItem('currentTopic');
+    if (savedTopic) {
+        try {
+            const {category, title} = JSON.parse(savedTopic);
+            if (document.querySelector('#topic-view-page.active')) {
+                openTopic(category, title);
+            }
+        } catch (e) {
+            localStorage.removeItem('currentTopic');
+        }
+    }
 }
 
 function filterByCategory(category) {
@@ -491,7 +539,10 @@ function loadCategoryTopics(category, searchQuery = '') {
         let statusBadge = 'status-new';
         let statusText = 'New';
         
-        if (topic.replies === 0) {
+        if (topic.closed) {
+            statusBadge = 'status-closed';
+            statusText = 'Closed';
+        } else if (topic.replies === 0) {
             statusBadge = 'status-unanswered';
             statusText = 'No Replies';
         } else if (topic.views > 200 || topic.replies > 10) {
@@ -540,16 +591,6 @@ function loadCategoryTopics(category, searchQuery = '') {
 
 // Добавляем обработчики для иконок категорий на странице категорий
 document.addEventListener('DOMContentLoaded', function() {
-    // Обработчики для иконок в боковом меню на странице категорий
-    document.querySelectorAll('#category-page .sidebar-category').forEach(category => {
-        category.addEventListener('click', function() {
-            const categoryId = this.getAttribute('data-category');
-            if (categoryId) {
-                filterByCategory(categoryId);
-            }
-        });
-    });
-    
     // Обработчик поиска в категориях
     const categorySearchInput = document.getElementById('categorySearchInput');
     if (categorySearchInput) {
@@ -566,6 +607,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Функция для возврата к категории
 function backToCategory() {
+    // Очищаем сохраненную тему
+    localStorage.removeItem('currentTopic');
+    localStorage.setItem('currentPage', 'forum');
+    
     if (currentTopicCategory) {
         filterByCategory(currentTopicCategory);
     } else {
@@ -575,3 +620,46 @@ function backToCategory() {
 
 // Делаем функцию глобально доступной
 window.backToCategory = backToCategory;
+
+// Административные функции
+function toggleTopicStatus(category, title) {
+    const topicIndex = userTopics.findIndex(t => t.title === title && t.category === category);
+    if (topicIndex !== -1) {
+        userTopics[topicIndex].closed = !userTopics[topicIndex].closed;
+        localStorage.setItem('userTopics', JSON.stringify(userTopics));
+        showNotification('Успех', `Тема ${userTopics[topicIndex].closed ? 'закрыта' : 'открыта'}`, 'success');
+        openTopic(category, title);
+    }
+}
+
+function deleteTopic(category, title) {
+    if (confirm('Вы уверены, что хотите удалить эту тему?')) {
+        const topicIndex = userTopics.findIndex(t => t.title === title && t.category === category);
+        if (topicIndex !== -1) {
+            userTopics.splice(topicIndex, 1);
+            localStorage.setItem('userTopics', JSON.stringify(userTopics));
+            showNotification('Успех', 'Тема удалена', 'success');
+            backToCategory();
+        }
+    }
+}
+
+function muteUser(username) {
+    let mutedUsers = JSON.parse(localStorage.getItem('mutedUsers') || '[]');
+    if (!mutedUsers.includes(username)) {
+        mutedUsers.push(username);
+        localStorage.setItem('mutedUsers', JSON.stringify(mutedUsers));
+        showNotification('Успех', `Пользователь ${username} заглушен`, 'success');
+    }
+}
+
+function banUser(username) {
+    if (confirm(`Вы уверены, что хотите заблокировать пользователя ${username}?`)) {
+        let bannedUsers = JSON.parse(localStorage.getItem('bannedUsers') || '[]');
+        if (!bannedUsers.includes(username)) {
+            bannedUsers.push(username);
+            localStorage.setItem('bannedUsers', JSON.stringify(bannedUsers));
+            showNotification('Успех', `Пользователь ${username} заблокирован`, 'success');
+        }
+    }
+}

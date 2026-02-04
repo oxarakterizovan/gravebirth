@@ -5,10 +5,10 @@
 // Данные игровых предметов
 const gameItems = {
     team: [{
-        title: "Team composition",
+        title: "Командный состав",
         author: "ProGamer2024",
-        date: "2 hours ago",
-        content: "Best team setups for current meta.",
+        date: "2 часа назад",
+        content: "Лучшие командные составы для текущей меты.",
         replies: 15,
         views: 234,
         isPopular: true,
@@ -16,10 +16,10 @@ const gameItems = {
         isAdminOnly: false
     }],
     core: [{
-        title: "Shadow Reaper Build Guide",
+        title: "Гайд по сборке Теневого Жнеца",
         author: "GRAVEBIRTH", 
-        date: "1 hour ago",
-        content: `# Shadow Reaper - Complete Guide\n\n## Overview\nShadow Reaper is one of the most powerful core characters in CSC, specializing in high burst damage and mobility. This guide covers optimal builds, gameplay strategies, and team synergies.\n\n## Core Items\n\n### Early Game (0-15 minutes)\n- **Shadowblade** - Essential for invisibility and positioning\n- **Power Treads** - Provides attack speed and survivability\n- **Aquila Ring** - Mana sustain and damage\n\n### Mid Game (15-30 minutes)\n- **Desolator** - Armor reduction for increased damage\n- **Black King Bar** - Magic immunity for team fights\n- **Blink Dagger** - Enhanced mobility and initiation\n\n### Late Game (30+ minutes)\n- **Butterfly** - Evasion and attack speed\n- **Satanic** - Lifesteal and survivability\n- **Monkey King Bar** - True strike against evasion\n\n## Skill Build\n\n**Level Priority:**\n1. Shadow Strike (Q) - Max first for harass\n2. Blink Strike (W) - One point early, max second\n3. Blur (E) - Max last for survivability\n4. Vendetta (R) - Take at 6, 12, 18\n\n## Gameplay Strategy\n\n### Laning Phase\n- Focus on last-hitting and denying creeps\n- Use Shadow Strike to harass enemy heroes\n- Maintain creep equilibrium near your tower\n- Ward key areas to avoid ganks\n\n### Mid Game\n- Look for solo pickoffs with Vendetta\n- Join team fights from the backline\n- Focus on eliminating enemy supports first\n- Control vision around objectives\n\n### Late Game\n- Split push when possible\n- Target enemy carries in team fights\n- Use BKB timing wisely\n- Coordinate with team for high ground pushes\n\n## Counters and Synergies\n\n### Good Against:\n- Squishy supports\n- Immobile carries\n- Heroes without escape mechanisms\n\n### Weak Against:\n- Heroes with detection (Slardar, Bounty Hunter)\n- AoE damage dealers\n- Heroes with strong disable\n\n### Team Synergies:\n- Works well with initiators\n- Benefits from vision providers\n- Synergizes with other physical damage dealers\n\n## Tips and Tricks\n\n1. **Vendetta Usage**: Use for initiation, not just invisibility\n2. **Item Timing**: Rush key items based on game state\n3. **Positioning**: Always fight from advantageous positions\n4. **Map Awareness**: Constantly check minimap for opportunities\n5. **Itemization**: Adapt build based on enemy team composition\n\n## Conclusion\n\nShadow Reaper requires good game sense and mechanical skill but rewards players with incredible impact potential. Master the basics first, then focus on advanced techniques like animation canceling and optimal item timings.\n\n*Remember: Practice makes perfect. Good luck in your games!*`,
+        date: "1 час назад",
+        content: `# Теневой Жнец - Полный гайд\n\n## Обзор\nТеневой Жнец - один из самых мощных основных персонажей в CSC, специализирующийся на высоком взрывном уроне и мобильности. Этот гайд охватывает оптимальные сборки, игровые стратегии и командные синергии.\n\n## Основные предметы\n\n### Ранняя игра (0-15 минут)\n- **Теневой клинок** - Необходим для невидимости и позиционирования\n- **Силовые сапоги** - Обеспечивает скорость атаки и выживаемость\n- **Кольцо Аквилы** - Поддержка маны и урон\n\n### Средняя игра (15-30 минут)\n- **Опустошитель** - Снижение брони для увеличения урона\n- **Черный королевский жезл** - Иммунитет к магии для командных боев\n- **Кинжал прыжка** - Улучшенная мобильность и инициация\n\n### Поздняя игра (30+ минут)\n- **Бабочка** - Уклонение и скорость атаки\n- **Сатаник** - Вампиризм и выживаемость\n- **Жезл короля обезьян** - Точный удар против уклонения\n\n## Прокачка навыков\n\n**Приоритет уровней:**\n1. Теневой удар (Q) - Максимум первым для харасса\n2. Удар прыжком (W) - Одно очко рано, максимум вторым\n3. Размытие (E) - Максимум последним для выживаемости\n4. Вендетта (R) - Брать на 6, 12, 18\n\n## Игровая стратегия\n\n### Фаза лайнинга\n- Сосредоточьтесь на добивании и отрицании крипов\n- Используйте Теневой удар для харасса вражеских героев\n- Поддерживайте равновесие крипов возле своей башни\n- Ставьте варды в ключевых областях, чтобы избежать гангов\n\n### Средняя игра\n- Ищите одиночные убийства с Вендеттой\n- Присоединяйтесь к командным боям с задней линии\n- Сосредоточьтесь на устранении вражеских саппортов в первую очередь\n- Контролируйте видение вокруг целей\n\n### Поздняя игра\n- Сплит-пушьте когда возможно\n- Нацеливайтесь на вражеских керри в командных боях\n- Мудро используйте время БКБ\n- Координируйтесь с командой для пушей на высокую землю\n\n## Контры и синергии\n\n### Хорош против:\n- Хрупких саппортов\n- Неподвижных керри\n- Героев без механизмов побега\n\n### Слаб против:\n- Героев с обнаружением (Сларк, Охотник за головами)\n- Дилеров АоЕ урона\n- Героев с сильным контролем\n\n### Командные синергии:\n- Хорошо работает с инициаторами\n- Получает пользу от провайдеров видения\n- Синергирует с другими дилерами физического урона\n\n## Советы и трюки\n\n1. **Использование Вендетты**: Используйте для инициации, а не только для невидимости\n2. **Тайминг предметов**: Спешите с ключевыми предметами в зависимости от состояния игры\n3. **Позиционирование**: Всегда сражайтесь с выгодных позиций\n4. **Осведомленность о карте**: Постоянно проверяйте миникарту на предмет возможностей\n5. **Предметизация**: Адаптируйте сборку в зависимости от состава вражеской команды\n\n## Заключение\n\nТеневой Жнец требует хорошего игрового чутья и механических навыков, но вознаграждает игроков невероятным потенциалом воздействия. Сначала освойте основы, затем сосредоточьтесь на продвинутых техниках, таких как отмена анимации и оптимальные тайминги предметов.\n\n*Помните: практика - путь к совершенству. Удачи в ваших играх!*`,
         replies: 23,
         views: 445,
         isPopular: true,
@@ -27,10 +27,10 @@ const gameItems = {
         isAdminOnly: false
     }],
     support: [{
-        title: "Crystal Maiden Support Guide",
+        title: "Гайд по Кристальной Деве саппорту",
         author: "SupportMaster",
-        date: "3 hours ago",
-        content: `# Crystal Maiden - Support Guide\n\n## Overview\nCrystal Maiden is a powerful support hero with excellent crowd control and team fight presence.\n\n## Core Items\n- **Tranquil Boots** - Mobility and health regen\n- **Force Staff** - Positioning and escape\n- **Glimmer Cape** - Protection for team\n\n## Skill Build\n1. Crystal Nova (Q) - Max first\n2. Frostbite (W) - One point early\n3. Brilliance Aura (E) - Max second\n4. Freezing Field (R) - Ultimate`,
+        date: "3 часа назад",
+        content: `# Кристальная Дева - Гайд по саппорту\n\n## Обзор\nКристальная Дева - мощный саппорт герой с отличным контролем толпы и присутствием в командных боях.\n\n## Основные предметы\n- **Спокойные сапоги** - Мобильность и восстановление здоровья\n- **Посох силы** - Позиционирование и побег\n- **Плащ мерцания** - Защита для команды\n\n## Прокачка навыков\n1. Кристальная Нова (Q) - Максимум первым\n2. Обморожение (W) - Одно очко рано\n3. Аура Блеска (E) - Максимум вторым\n4. Ледяное Поле (R) - Ультимат`,
         replies: 12,
         views: 189,
         isPopular: false,
@@ -38,10 +38,10 @@ const gameItems = {
         isAdminOnly: false
     }],
     'character-builds': [{
-        title: "Shadow Assassin - Character Build",
+        title: "Теневой Ассасин - Сборка персонажа",
         author: "ItemExpert",
-        date: "5 hours ago",
-        content: `# Shadow Assassin - Character Build\n\n## Overview\nShadow Assassin is a versatile damage dealer with excellent mobility and burst potential.\n\n## Core Items\n- **Desolator** - Armor reduction\n- **Butterfly** - Evasion and damage\n- **Satanic** - Lifesteal\n\n## Skill Build\n1. Shadow Strike (Q) - Max first\n2. Blink (W) - One point early\n3. Critical Strike (E) - Max second\n4. Requiem (R) - Ultimate`,
+        date: "5 часов назад",
+        content: `# Теневой Ассасин - Сборка персонажа\n\n## Обзор\nТеневой Ассасин - универсальный дилер урона с отличной мобильностью и взрывным потенциалом.\n\n## Основные предметы\n- **Опустошитель** - Снижение брони\n- **Бабочка** - Уклонение и урон\n- **Сатаник** - Вампиризм\n\n## Прокачка навыков\n1. Теневой удар (Q) - Максимум первым\n2. Прыжок (W) - Одно очко рано\n3. Критический удар (E) - Максимум вторым\n4. Реквием (R) - Ультимат`,
         replies: 8,
         views: 156,
         isPopular: false,
@@ -49,10 +49,10 @@ const gameItems = {
         isAdminOnly: false
     }],
     'item-builds': [{
-        title: "Crystal Maiden - Item Builds",
+        title: "Кристальная Дева - Сборки предметов",
         author: "WardMaster",
-        date: "6 hours ago",
-        content: `# Crystal Maiden - Item Builds\n\n## Essential Items\n- **Observer Wards** - Vision control\n- **Sentry Wards** - Counter invisibility\n- **Force Staff** - Team mobility\n\n## Luxury Items\n- **Glimmer Cape** - Magic resistance\n- **Ghost Scepter** - Physical immunity`,
+        date: "6 часов назад",
+        content: `# Кристальная Дева - Сборки предметов\n\n## Основные предметы\n- **Обсервер варды** - Контроль видения\n- **Сентри варды** - Противодействие невидимости\n- **Посох силы** - Мобильность команды\n\n## Люксовые предметы\n- **Плащ мерцания** - Магическое сопротивление\n- **Призрачный скипетр** - Физический иммунитет`,
         replies: 5,
         views: 98,
         isPopular: false,
@@ -60,10 +60,10 @@ const gameItems = {
         isAdminOnly: false
     }],
     questions: [{
-        title: "How to improve last hitting?",
+        title: "Как улучшить ласт-хит?",
         author: "NewPlayer123",
-        date: "8 hours ago",
-        content: `I'm struggling with last hitting creeps. Any tips for beginners?\n\n- Should I focus on damage items first?\n- What's the best way to practice?\n- Any specific heroes for learning?`,
+        date: "8 часов назад",
+        content: `Мне трудно дается ласт-хит крипов. Какие-нибудь советы для новичков?\n\n- Стоит ли сосредоточиться на предметах урона сначала?\n- Какой лучший способ практиковаться?\n- Какие герои лучше для обучения?`,
         replies: 18,
         views: 267,
         isPopular: true,
@@ -285,20 +285,20 @@ const pages = {
 
 // Функция для получения названия роли
 function getUserRole(user) {
-    if (!user) return 'Member';
+    if (!user) return 'Участник';
     
     const roles = {
-        'chief-admin': 'Chief Administrator',
-        'tech-admin': 'Technical Administrator', 
-        'st-moderator': 'ST. Moderator',
-        'moderator': 'Moderator',
-        'media': 'Media',
-        'support': 'Support',
-        'helper': 'Helper',
-        'member': 'Member'
+        'chief-admin': 'Главный Администратор',
+        'tech-admin': 'Технический Администратор', 
+        'st-moderator': 'Старший Модератор',
+        'moderator': 'Модератор',
+        'media': 'Медиа',
+        'support': 'Поддержка',
+        'helper': 'Помощник',
+        'member': 'Участник'
     };
     
-    return roles[user.role] || (user.isAdmin ? 'Administrator' : 'Member');
+    return roles[user.role] || (user.isAdmin ? 'Администратор' : 'Участник');
 }
 
 // Система прав доступа

@@ -1,4 +1,4 @@
-# 🚀 Добавление проекта GRAVEBIRTH в Git
+# 🚀 Добавление проекта VimeTalks в Git
 
 ## 📋 **Пошаговая инструкция**
 
@@ -19,14 +19,14 @@ git add index.html styles.css logo.png js/ backend/ README.md
 
 ### **3. Первый коммит**
 ```bash
-git commit -m "Initial commit: BLACK TRIAD CSC website"
+git commit -m "Initial commit: VimeTalks website"
 ```
 
 ### **4. Создание репозитория на GitHub**
 1. Зайти на [GitHub.com](https://github.com)
 2. Нажать "New repository"
-3. Название: `gravebirth` или `black-triad-csc`
-4. Описание: `BLACK TRIAD CSC - Game guides website`
+3. Название: `vimetalks` или `gravebirth`
+4. Описание: `VimeTalks - Community forum website`
 5. Выбрать Public/Private
 6. НЕ добавлять README, .gitignore, license (уже есть)
 

@@ -4,7 +4,7 @@
 
 export class StorageManager {
     constructor() {
-        this.prefix = 'gravebirth_';
+        this.prefix = 'vimetalks_';
     }
 
     set(key, value) {

@@ -4,39 +4,39 @@
 
 export const gameItems = {
     team: [{
-        title: "Team composition",
+        title: "Командный состав",
         author: "ProGamer2024",
-        date: "2 hours ago",
-        content: "Best team setups for current meta.",
+        date: "2 часа назад",
+        content: "Лучшие командные составы для текущей меты.",
         replies: 15,
         views: 234,
         isPopular: true,
         hasAnswers: true,
         isAdminOnly: false,
         items: [{
-            name: "Captain's Banner",
-            type: "Team Item",
-            stats: "+15% Team Damage, +20% Experience Gain",
-            active: "Rally: Boost all team members' attack speed by 30% for 8 seconds",
-            passive: "Leadership: Nearby allies gain 10% damage reduction"
+            name: "Знамя Капитана",
+            type: "Командный предмет",
+            stats: "+15% командного урона, +20% получения опыта",
+            active: "Митинг: Увеличивает скорость атаки всех членов команды на 30% на 8 секунд",
+            passive: "Лидерство: Близкие союзники получают 10% снижения урона"
         }]
     }],
     core: [{
-        title: "Core",
+        title: "Основные",
         author: "MetaMaster",
-        date: "4 hours ago",
-        content: "Shadow Reaper build guide.",
+        date: "4 часа назад",
+        content: "Гайд по сборке Теневого Жнеца.",
         replies: 23,
         views: 445,
         isPopular: true,
         hasAnswers: true,
         isAdminOnly: false,
         items: [{
-            name: "Void Blade",
-            type: "Weapon",
-            stats: "+180 Attack Damage, +25% Critical Strike",
-            active: "Void Strike: Next attack ignores armor and deals true damage",
-            passive: "Shadow Walk: Gain invisibility for 2 seconds after killing an enemy"
+            name: "Клинок Пустоты",
+            type: "Оружие",
+            stats: "+180 урона атаки, +25% критического удара",
+            active: "Удар Пустоты: Следующая атака игнорирует броню и наносит чистый урон",
+            passive: "Теневая Поступь: Получает невидимость на 2 секунды после убийства врага"
         }]
     }]
 };

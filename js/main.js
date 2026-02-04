@@ -320,7 +320,7 @@ function loadUserPosts() {
     };
     
     setTimeout(() => {
-        showNotification('Добро пожаловать', 'С любовью BLACK TRIAD CSC', 'success', 3000);
+        showNotification('Добро пожаловать', 'С любовью VimeTalks', 'success', 3000);
     }, 1000);
     
     // Наблюдатель за модальным окном регистрации

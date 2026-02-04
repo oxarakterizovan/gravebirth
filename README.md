@@ -1,4 +1,4 @@
-# GRAVEBIRTH Backend Setup
+# VimeTalks Backend Setup
 
 ## Требования
 - Node.js (версия 14 или выше)

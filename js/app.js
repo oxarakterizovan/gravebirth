@@ -18,7 +18,7 @@ const App = {
         
         // Показ приветственного уведомления
         setTimeout(() => {
-            NotificationComponent.show('Добро пожаловать', 'Сайт BLACK TRIAD CSC успешно загружен', 'success', 3000);
+            NotificationComponent.show('Добро пожаловать', 'Сайт VimeTalks успешно загружен', 'success', 3000);
         }, 1000);
         
         console.log('GRAVEBIRTH Website Loaded');

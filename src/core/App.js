@@ -24,7 +24,7 @@ class App {
         this.notifications.init();
         this.navigation.init();
         
-        console.log('GRAVEBIRTH App initialized');
+        console.log('VimeTalks App initialized');
     }
 }
 

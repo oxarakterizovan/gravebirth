@@ -36,12 +36,12 @@ function getCategoryIcon(category) {
 
 function getCategoryName(category) {
     const names = {
-        team: 'Team composition',
-        core: 'Core',
-        support: 'Support',
-        'character-builds': 'Character Builds',
-        'item-builds': 'Item Builds',
-        questions: 'Questions'
+        team: 'Командный состав',
+        core: 'Основные',
+        support: 'Саппорт',
+        'character-builds': 'Сборки персонажей',
+        'item-builds': 'Сборки предметов',
+        questions: 'Вопросы'
     };
     return names[category] || category;
 }
@@ -212,30 +212,30 @@ function loadForumTopics(filter = 'recent', selectedCategory = null) {
     }
     
     if (topics.length === 0) {
-        let message = 'No topics found';
-        if (filter === 'popular') message = 'No popular topics found';
-        else if (filter === 'hot') message = 'No hot topics found';
-        else if (filter === 'unanswered') message = 'No unanswered topics found';
-        else if (filter === 'my-topics') message = 'You haven\'t created any topics yet';
-        else if (selectedCategory) message = `No topics found for ${getCategoryName(selectedCategory)}`;
+        let message = 'Темы не найдены';
+        if (filter === 'popular') message = 'Популярные темы не найдены';
+        else if (filter === 'hot') message = 'Горячие темы не найдены';
+        else if (filter === 'unanswered') message = 'Неотвеченные темы не найдены';
+        else if (filter === 'my-topics') message = 'Вы еще не создали ни одной темы';
+        else if (selectedCategory) message = `Темы не найдены для ${getCategoryName(selectedCategory)}`;
         
-        topicsContainer.innerHTML = `<div class="no-topics"><i class="fas fa-comments"></i><h3>${message}</h3><p>Be the first to create one!</p></div>`;
+        topicsContainer.innerHTML = `<div class="no-topics"><i class="fas fa-comments"></i><h3>${message}</h3><p>Будьте первым, кто создаст тему!</p></div>`;
         return;
     }
     
     topicsContainer.innerHTML = topics.map(topic => {
         let statusBadge = 'status-new';
-        let statusText = 'New';
+        let statusText = 'Новая';
         
         if (topic.replies === 0) {
             statusBadge = 'status-unanswered';
-            statusText = 'No Replies';
+            statusText = 'Без ответов';
         } else if (topic.views > 200 || topic.replies > 10) {
             statusBadge = 'status-popular';
-            statusText = 'Popular';
+            statusText = 'Популярная';
         } else if (topic.replies > 5) {
             statusBadge = 'status-hot';
-            statusText = 'Hot';
+            statusText = 'Горячая';
         }
         
         return `
@@ -545,28 +545,28 @@ function loadCategoryTopics(category, searchQuery = '') {
     
     if (topics.length === 0) {
         const message = searchQuery ? 
-            `<div class="no-topics"><i class="fas fa-search"></i><h3>No results found</h3><p>No topics found for "${searchQuery}" in ${getCategoryName(category)}.</p></div>` :
-            `<div class="no-topics"><i class="fas fa-comments"></i><h3>No topics found</h3><p>No topics found in ${getCategoryName(category)}. Be the first to create one!</p></div>`;
+            `<div class="no-topics"><i class="fas fa-search"></i><h3>Результаты не найдены</h3><p>Темы не найдены по запросу "${searchQuery}" в ${getCategoryName(category)}.</p></div>` :
+            `<div class="no-topics"><i class="fas fa-comments"></i><h3>Темы не найдены</h3><p>Темы не найдены в ${getCategoryName(category)}. Будьте первым, кто создаст тему!</p></div>`;
         container.innerHTML = message;
         return;
     }
     
     container.innerHTML = topics.map(topic => {
         let statusBadge = 'status-new';
-        let statusText = 'New';
+        let statusText = 'Новая';
         
         if (topic.closed) {
             statusBadge = 'status-closed';
-            statusText = 'Closed';
+            statusText = 'Закрыта';
         } else if (topic.replies === 0) {
             statusBadge = 'status-unanswered';
-            statusText = 'No Replies';
+            statusText = 'Без ответов';
         } else if (topic.views > 200 || topic.replies > 10) {
             statusBadge = 'status-popular';
-            statusText = 'Popular';
+            statusText = 'Популярная';
         } else if (topic.replies > 5) {
             statusBadge = 'status-hot';
-            statusText = 'Hot';
+            statusText = 'Горячая';
         }
         
         return `

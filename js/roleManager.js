@@ -83,14 +83,14 @@ function generateRolePanel(user) {
 // Информация о ролях
 function getRoleInfo(role) {
     const roleData = {
-        'chief-admin': { name: 'Chief Administrator', icon: 'fas fa-crown', color: '#ff6b6b' },
-        'tech-admin': { name: 'Technical Administrator', icon: 'fas fa-cogs', color: '#4ecdc4' },
-        'st-moderator': { name: 'ST. Moderator', icon: 'fas fa-shield-alt', color: '#45b7d1' },
-        'moderator': { name: 'Moderator', icon: 'fas fa-gavel', color: '#96ceb4' },
-        'media': { name: 'Media', icon: 'fas fa-camera', color: '#feca57' },
-        'support': { name: 'Support', icon: 'fas fa-headset', color: '#ff9ff3' },
-        'helper': { name: 'Helper', icon: 'fas fa-hands-helping', color: '#54a0ff' },
-        'member': { name: 'Member', icon: 'fas fa-user', color: '#ddd' }
+        'chief-admin': { name: 'Главный Администратор', icon: 'fas fa-crown', color: '#ff6b6b' },
+        'tech-admin': { name: 'Технический Администратор', icon: 'fas fa-cogs', color: '#4ecdc4' },
+        'st-moderator': { name: 'Старший Модератор', icon: 'fas fa-shield-alt', color: '#45b7d1' },
+        'moderator': { name: 'Модератор', icon: 'fas fa-gavel', color: '#96ceb4' },
+        'media': { name: 'Медиа', icon: 'fas fa-camera', color: '#feca57' },
+        'support': { name: 'Поддержка', icon: 'fas fa-headset', color: '#ff9ff3' },
+        'helper': { name: 'Помощник', icon: 'fas fa-hands-helping', color: '#54a0ff' },
+        'member': { name: 'Участник', icon: 'fas fa-user', color: '#ddd' }
     };
     
     return roleData[role] || roleData['member'];

@@ -18,25 +18,112 @@
 
     <!-- Header с навигацией -->
     <header id="mainHeader">
-        <div class="logo" id="logo">
-            <img src="./logo.png" alt="BTC" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
-            <div class="logo-text">BTC</div>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo" id="logo">
+                <img src="./logo.png" alt="BTC" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
+                <div class="logo-text">BTC</div>
+            </div>
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="nav-link active" data-page="home">Main</a></li>
-                <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
-                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
-                <li><a href="#" class="nav-link" data-page="forum">Forum</a></li>
-                <li><a href="#" class="nav-link" data-page="tickets">Submit Ticket</a></li>
-                <li><a href="#" class="nav-link" data-page="support" id="supportNavLink" style="display: none;">Technical Support</a></li>
-                <li><a href="#" class="nav-link" data-page="admin" id="adminNavLink" style="display: none;">Admin</a></li>
+                <li><a href="#" class="nav-btn" data-page="home" title="Main"><i class="fas fa-home"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="about" title="About Us"><i class="fas fa-info-circle"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="contact" title="Contact"><i class="fas fa-envelope"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="forum" title="Forum"><i class="fas fa-comments"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="tickets" title="Submit Ticket"><i class="fas fa-ticket-alt"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="profile" data-auth="required" title="Profile"><i class="fas fa-user"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="settings" data-auth="required" title="Settings"><i class="fas fa-cog"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="support" data-role="support" title="Technical Support" style="display: none;"><i class="fas fa-headset"></i></a></li>
+                <li><a href="#" class="nav-btn" data-page="admin" data-role="admin" title="Admin Panel" style="display: none;"><i class="fas fa-shield-alt"></i></a></li>
+                <li class="search-container-header">
+                    <div class="header-search">
+                        <input type="text" id="headerUserSearch" placeholder="Поиск пользователей...">
+                        <div class="search-results-dropdown" id="searchResultsDropdown"></div>
+                    </div>
+                </li>
                 <li id="user-controls">
                     <button class="auth-btn" id="authBtn">Sign In</button>
                 </li>
             </ul>
         </nav>
     </header>
+
+    <!-- Выезжающее меню категорий -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h3>Категории</h3>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-category-item" data-category="team">
+                <div class="category-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Team Composition</span>
+                    <span class="category-subtitle">Стратегии командной игры</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="core">
+                <div class="category-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Core Characters</span>
+                    <span class="category-subtitle">Основные персонажи</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="support">
+                <div class="category-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Support Characters</span>
+                    <span class="category-subtitle">Персонажи поддержки</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="character-builds">
+                <div class="category-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Character Builds</span>
+                    <span class="category-subtitle">Сборки персонажей</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="item-builds">
+                <div class="category-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Item Builds</span>
+                    <span class="category-subtitle">Сборки предметов</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="questions">
+                <div class="category-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Questions & Answers</span>
+                    <span class="category-subtitle">Вопросы и ответы</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay для закрытия меню -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- Выпадающее меню профиля -->
     <div class="profile-dropdown" id="profileDropdown">
@@ -694,136 +781,7 @@
             </div>
         </div>
         
-        <div class="forum-categories">
-            <div class="category-view-card" data-category="team">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Team composition</h3>
-                        <div class="topic-count">45 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    The team responsible for guides, support, and forum moderation
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 45 Topics</span>
-                        <span><i class="fas fa-reply"></i> 234 Replies</span>
-                    </div>
-                    <div class="category-view-badge">Popular</div>
-                </div>
-            </div>
-            
-            <div class="category-view-card" data-category="core">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Core</h3>
-                        <div class="topic-count">67 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    Core character builds, strategies, and gameplay mechanics for main damage dealers.
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 67 Topics</span>
-                        <span><i class="fas fa-reply"></i> 312 Replies</span>
-                    </div>
-                    <div class="category-view-badge">Active</div>
-                </div>
-            </div>
-            
-            <div class="category-view-card" data-category="support">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Support</h3>
-                        <div class="topic-count">38 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    Support character guides, healing strategies, and team assistance tactics.
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 38 Topics</span>
-                        <span><i class="fas fa-reply"></i> 189 Replies</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category-view-card" data-category="character-builds">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Character Builds</h3>
-                        <div class="topic-count">52 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    Character builds, equipment recommendations, and optimization for all characters.
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 52 Topics</span>
-                        <span><i class="fas fa-reply"></i> 267 Replies</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category-view-card" data-category="item-builds">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-ring"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Item Builds</h3>
-                        <div class="topic-count">29 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    Item builds, utility equipment, and team enhancement items for all roles.
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 29 Topics</span>
-                        <span><i class="fas fa-reply"></i> 145 Replies</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category-view-card" data-category="questions">
-                <div class="category-view-header">
-                    <div class="category-view-icon">
-                        <i class="fas fa-question-circle"></i>
-                    </div>
-                    <div class="category-view-title">
-                        <h3>Questions</h3>
-                        <div class="topic-count">73 Topics</div>
-                    </div>
-                </div>
-                <div class="category-view-description">
-                    General questions, help requests, and community discussions about gameplay mechanics.
-                </div>
-                <div class="category-view-stats">
-                    <div class="category-view-meta">
-                        <span><i class="fas fa-comment"></i> 73 Topics</span>
-                        <span><i class="fas fa-reply"></i> 298 Replies</span>
-                    </div>
-                    <div class="category-view-badge">New</div>
-                </div>
-            </div>
-        </div>
+
         
         <div class="forum-tabs">
             <button class="forum-tab active" data-tab="recent">Recent Topics</button>
@@ -1601,6 +1559,7 @@
     <script src="./js/auth.js"></script>
     <script src="./js/profile.js"></script>
     <script src="./js/userProfile.js"></script>
+    <script src="./js/headerSearch.js"></script>
     <script src="./js/forum.js"></script>
     <script src="./js/settings.js"></script>
     <script src="./js/roleManager.js"></script>
@@ -1608,5 +1567,6 @@
     <script src="./js/techSupport.js"></script>
     <script src="./js/admin.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/sidebar.js"></script>
 </body>
 </html>

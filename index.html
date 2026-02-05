@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VimeTalks - Developer Host Manager</title>
+    <title>WinxTools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="logo" id="logo">
-                <img src="./logo.png" alt="VimeTalks" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
-                <div class="logo-text">VimeTalks</div>
+                <img src="./logo.png" alt="WinxTools" style="width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">
+                <div class="logo-text">WinxTools</div>
             </div>
         </div>
         <nav>
@@ -60,7 +60,7 @@
             </button>
         </div>
         <div class="sidebar-content">
-            <div class="sidebar-category-item" data-category="team">
+            <div class="sidebar-category-item" data-category="team" onclick="filterByCategory('team')">
                 <div class="category-icon">
                     <i class="fas fa-users"></i>
                 </div>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             
-            <div class="sidebar-category-item" data-category="core">
+            <div class="sidebar-category-item" data-category="core" onclick="filterByCategory('core')">
                 <div class="category-icon">
                     <i class="fas fa-fire"></i>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             
-            <div class="sidebar-category-item" data-category="support">
+            <div class="sidebar-category-item" data-category="support" onclick="filterByCategory('support')">
                 <div class="category-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             
-            <div class="sidebar-category-item" data-category="character-builds">
+            <div class="sidebar-category-item" data-category="character-builds" onclick="filterByCategory('character-builds')">
                 <div class="category-icon">
                     <i class="fas fa-gem"></i>
                 </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
             
-            <div class="sidebar-category-item" data-category="item-builds">
+            <div class="sidebar-category-item" data-category="item-builds" onclick="filterByCategory('item-builds')">
                 <div class="category-icon">
                     <i class="fas fa-ring"></i>
                 </div>
@@ -110,7 +110,7 @@
                 </div>
             </div>
             
-            <div class="sidebar-category-item" data-category="questions">
+            <div class="sidebar-category-item" data-category="questions" onclick="filterByCategory('questions')">
                 <div class="category-icon">
                     <i class="fas fa-question-circle"></i>
                 </div>
@@ -147,8 +147,8 @@
 
     <!-- Главная страница -->
     <main class="main-content" id="home-page">
-        <h1 class="fade-in">VimeTalks</h1>
-        <p class="subtitle fade-in" id="adminSubtitle" style="display: none;">DEVELOPER HOST MANAGER</p>
+        <h1 class="fade-in">WinxTools</h1>
+        <p class="subtitle fade-in" id="adminSubtitle" style="display: none;"></p>
         <a href="#" class="btn fade-in" id="contactBtn">СВЯЗАТЬСЯ СО МНОЙ</a>
         
         <!-- Контент в левой части -->

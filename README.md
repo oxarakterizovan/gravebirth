@@ -1,4 +1,4 @@
-# VimeTalks Backend Setup
+# WinxTools Backend Setup
 
 ## Требования
 - Node.js (версия 14 или выше)

@@ -300,6 +300,11 @@ function loadUserPosts() {
     });
     userPosts = [];
     
+    // Инициализация форума
+    if (typeof initForum === 'function') {
+        initForum();
+    }
+    
     // Инициализация навигации
     initNavigation();
     
@@ -320,7 +325,7 @@ function loadUserPosts() {
     };
     
     setTimeout(() => {
-        showNotification('Добро пожаловать', 'С любовью VimeTalks', 'success', 3000);
+        showNotification('Добро пожаловать', 'С любовью WinxTools', 3000);
     }, 1000);
     
     // Наблюдатель за модальным окном регистрации

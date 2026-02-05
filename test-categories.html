@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест категорий</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-button { 
+            padding: 10px 20px; 
+            margin: 10px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .test-button:hover { background: #0056b3; }
+        .result { 
+            margin: 20px 0; 
+            padding: 15px; 
+            background: #f8f9fa; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест функционала категорий</h1>
+    
+    <div>
+        <h2>Тестирование категорий:</h2>
+        <button class="test-button" onclick="testCategory('team')">Team Composition</button>
+        <button class="test-button" onclick="testCategory('core')">Core Characters</button>
+        <button class="test-button" onclick="testCategory('support')">Support Characters</button>
+        <button class="test-button" onclick="testCategory('character-builds')">Character Builds</button>
+        <button class="test-button" onclick="testCategory('item-builds')">Item Builds</button>
+        <button class="test-button" onclick="testCategory('questions')">Questions</button>
+    </div>
+    
+    <div class="result" id="testResult">
+        Результаты тестирования будут отображены здесь...
+    </div>
+    
+    <script>
+        function testCategory(category) {
+            const result = document.getElementById('testResult');
+            
+            // Проверяем, есть ли функция filterByCategory
+            if (typeof filterByCategory === 'function') {
+                result.innerHTML = `✅ Функция filterByCategory найдена. Тестируем категорию: ${category}`;
+                try {
+                    filterByCategory(category);
+                    result.innerHTML += `<br>✅ Функция filterByCategory успешно вызвана для категории: ${category}`;
+                } catch (error) {
+                    result.innerHTML += `<br>❌ Ошибка при вызове filterByCategory: ${error.message}`;
+                }
+            } else {
+                result.innerHTML = `❌ Функция filterByCategory не найдена. Проверьте загрузку forum.js`;
+            }
+            
+            // Проверяем localStorage
+            const savedCategory = localStorage.getItem('currentCategory');
+            const savedPage = localStorage.getItem('currentPage');
+            
+            result.innerHTML += `<br><br><strong>Состояние localStorage:</strong>`;
+            result.innerHTML += `<br>currentCategory: ${savedCategory}`;
+            result.innerHTML += `<br>currentPage: ${savedPage}`;
+        }
+        
+        // Проверяем загрузку скриптов
+        window.addEventListener('load', () => {
+            const result = document.getElementById('testResult');
+            result.innerHTML = `
+                <strong>Статус загрузки скриптов:</strong><br>
+                filterByCategory: ${typeof filterByCategory !== 'undefined' ? '✅ Загружена' : '❌ Не найдена'}<br>
+                showPage: ${typeof showPage !== 'undefined' ? '✅ Загружена' : '❌ Не найдена'}<br>
+                getCategoryName: ${typeof getCategoryName !== 'undefined' ? '✅ Загружена' : '❌ Не найдена'}<br>
+                loadCategoryTopics: ${typeof loadCategoryTopics !== 'undefined' ? '✅ Загружена' : '❌ Не найдена'}
+            `;
+        });
+    </script>
+    
+    <!-- Подключаем необходимые скрипты -->
+    <script src="./js/data.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/navigation.js"></script>
+    <script src="./js/forum.js"></script>
+</body>
+</html>

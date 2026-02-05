@@ -61,9 +61,15 @@ function showPage(pageId) {
     window.scrollTo(0, 0);
     
     if (pageId === 'forum') {
-        if (!window.forumInitialized) {
+        if (typeof initForum === 'function') {
             initForum();
-            window.forumInitialized = true;
+        } else {
+            // Если функция еще не загружена, ждем немного
+            setTimeout(() => {
+                if (typeof initForum === 'function') {
+                    initForum();
+                }
+            }, 100);
         }
     } else if (pageId === 'settings') {
         loadSettings();
@@ -161,6 +167,39 @@ function initNavigation() {
                     return;
                 }
                 showAdminMain();
+            }
+            
+            showPage(page);
+        });
+    });
+    
+    // Обработчик для кнопок навигации в хедере (иконки)
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = btn.getAttribute('data-page');
+            
+            if (page === 'profile' || page === 'settings') {
+                if (!isLoggedIn) {
+                    showNotification('Требуется вход', 'Пожалуйста, войдите в систему для доступа к этой странице', 'warning');
+                    if (loginModal) loginModal.classList.add('active');
+                    return;
+                }
+            }
+            
+            if (page === 'admin') {
+                if (!isLoggedIn || !currentUser || !canAccessAdminPanel(currentUser)) {
+                    showNotification('Нет доступа', 'У вас нет прав для доступа к панели администратора', 'error');
+                    return;
+                }
+                showAdminMain();
+            }
+            
+            if (page === 'support') {
+                if (!isLoggedIn || !currentUser || !hasSupportRights(currentUser)) {
+                    showNotification('Нет доступа', 'У вас нет прав для доступа к технической поддержке', 'error');
+                    return;
+                }
             }
             
             showPage(page);

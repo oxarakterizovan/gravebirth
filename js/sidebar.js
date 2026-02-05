@@ -88,12 +88,21 @@ class SidebarManager {
     }
     
     selectCategory(category) {
-        // Используем существующую функцию фильтрации
-        if (typeof filterByCategory === 'function') {
-            filterByCategory(category);
-        } else {
-            console.error('filterByCategory function not found');
+        // Переходим на страницу форума и фильтруем по категории
+        if (typeof showPage === 'function') {
+            showPage('forum');
         }
+        
+        // Ждем загрузки страницы форума и вызываем фильтрацию
+        setTimeout(() => {
+            if (typeof filterByCategory === 'function') {
+                filterByCategory(category);
+            } else if (typeof window.filterByCategory === 'function') {
+                window.filterByCategory(category);
+            } else {
+                console.error('filterByCategory function not found');
+            }
+        }, 100);
         
         // Показываем уведомление о выборе категории
         const categoryName = this.getCategoryName(category);
@@ -160,12 +169,12 @@ class SidebarManager {
     
     getCategoryName(category) {
         const names = {
-            'team': 'Team Composition',
-            'core': 'Core Characters',
-            'support': 'Support Characters',
-            'character-builds': 'Character Builds',
-            'item-builds': 'Item Builds',
-            'questions': 'Questions & Answers'
+            'team': 'Командный состав',
+            'core': 'Основные',
+            'support': 'Саппорт',
+            'character-builds': 'Сборки персонажей',
+            'item-builds': 'Сборки предметов',
+            'questions': 'Вопросы'
         };
         return names[category] || category;
     }

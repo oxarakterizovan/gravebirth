@@ -303,6 +303,22 @@ function initForum() {
         });
     });
     
+    // Обработчики для боковой панели категорий на странице форума
+    const forumSidebarItems = document.querySelectorAll('#forum-page .sidebar-category');
+    forumSidebarItems.forEach(category => {
+        category.addEventListener('click', () => {
+            const categoryId = category.getAttribute('data-category');
+            if (categoryId) {
+                // Убираем активный класс со всех категорий
+                forumSidebarItems.forEach(item => item.classList.remove('active'));
+                // Добавляем активный класс к выбранной категории
+                category.classList.add('active');
+                // Загружаем темы для категории
+                loadForumTopics('recent', categoryId);
+            }
+        });
+    });
+    
     // Обработчики для вкладок форума
     const forumTabs = document.querySelectorAll('.forum-tab');
     forumTabs.forEach(tab => {
@@ -454,6 +470,9 @@ function filterByCategory(category) {
     loadCategoryTopics(category);
 }
 
+// Делаем функцию глобально доступной
+window.filterByCategory = filterByCategory;
+
 function showAllTopics() {
     // Восстанавливаем заголовок
     const pageHeader = document.querySelector('#forum-page .page-header h2');
@@ -487,21 +506,32 @@ function switchForumTab(tabType) {
     
     if (tabType === 'categories') {
         // Показываем боковую панель и темы
-        forumSidebar.style.display = 'block';
-        topicsContainer.style.display = 'block';
-        categoriesMainView.style.display = 'none';
+        if (forumSidebar) forumSidebar.style.display = 'block';
+        if (topicsContainer) topicsContainer.style.display = 'block';
+        if (categoriesMainView) categoriesMainView.style.display = 'none';
+        
         // По умолчанию показываем первую категорию
-        const firstCategory = document.querySelector('.sidebar-category');
+        const firstCategory = document.querySelector('#forum-page .sidebar-category');
         if (firstCategory) {
             const categoryId = firstCategory.getAttribute('data-category');
-            loadForumTopics('recent', categoryId);
+            // Убираем активный класс со всех категорий
+            document.querySelectorAll('#forum-page .sidebar-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+            // Добавляем активный класс к первой категории
             firstCategory.classList.add('active');
+            // Загружаем темы для первой категории
+            loadForumTopics('recent', categoryId);
         }
     } else {
         // Скрываем боковую панель и показываем темы
-        forumSidebar.style.display = 'none';
-        topicsContainer.style.display = 'block';
-        categoriesMainView.style.display = 'none';
+        if (forumSidebar) forumSidebar.style.display = 'none';
+        if (topicsContainer) topicsContainer.style.display = 'block';
+        if (categoriesMainView) categoriesMainView.style.display = 'none';
+        // Убираем активный класс со всех категорий
+        document.querySelectorAll('#forum-page .sidebar-category').forEach(cat => {
+            cat.classList.remove('active');
+        });
         loadForumTopics(tabType);
     }
 }
@@ -727,3 +757,11 @@ function banUser(username) {
         }
     }
 }
+
+// Экспортируем функции глобально для доступа из других модулей
+window.filterByCategory = filterByCategory;
+window.getCategoryName = getCategoryName;
+window.loadCategoryTopics = loadCategoryTopics;
+window.openTopic = openTopic;
+window.switchForumTab = switchForumTab;
+window.initForum = initForum;

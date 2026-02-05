@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Контейнер для уведомлений -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Header с навигацией -->
+    <header id="mainHeader">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo" id="logo">
+                <div class="logo-text">VimeTalks Test</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Выезжающее меню категорий -->
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <h3>Категории</h3>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-category-item" data-category="team">
+                <div class="category-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Team Composition</span>
+                    <span class="category-subtitle">Стратегии командной игры</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="core">
+                <div class="category-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Core Characters</span>
+                    <span class="category-subtitle">Основные персонажи</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-category-item" data-category="support">
+                <div class="category-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="category-details">
+                    <span class="category-title">Support Characters</span>
+                    <span class="category-subtitle">Персонажи поддержки</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay для закрытия меню -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Главная страница -->
+    <main class="main-content" id="home-page">
+        <h1 class="fade-in">Test Sidebar</h1>
+        <p>Нажмите на кнопку меню (☰) чтобы открыть боковое меню категорий</p>
+    </main>
+
+    <script>
+        // Минимальные переменные для работы
+        let notificationsEnabled = true;
+        let soundEnabled = false;
+        
+        // Простая функция уведомлений
+        function showNotification(title, message, type = 'info', duration = 5000) {
+            console.log(`[${type.toUpperCase()}] ${title}: ${message}`);
+            
+            const notificationContainer = document.getElementById('notificationContainer');
+            if (!notificationContainer) return;
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            
+            const icons = {
+                'success': 'fas fa-check-circle',
+                'error': 'fas fa-exclamation-circle',
+                'warning': 'fas fa-exclamation-triangle',
+                'info': 'fas fa-info-circle'
+            };
+            
+            notification.innerHTML = `
+                <div class="notification-icon">
+                    <i class="${icons[type] || icons.info}"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            notificationContainer.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            const closeBtn = notification.querySelector('.notification-close');
+            closeBtn.addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+            
+            if (duration > 0) {
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, duration);
+            }
+        }
+        
+        // Простая функция фильтрации категорий
+        function filterByCategory(category) {
+            console.log('filterByCategory called with:', category);
+            showNotification('Категория выбрана', `Переход к категории: ${category}`, 'success');
+        }
+        
+        // Инициализация бокового меню
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing sidebar...');
+            
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const sidebarClose = document.getElementById('sidebarClose');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const categoryItems = document.querySelectorAll('.sidebar-category-item');
+            
+            console.log('Found elements:', {
+                menuToggle: !!menuToggle,
+                sidebarMenu: !!sidebarMenu,
+                sidebarClose: !!sidebarClose,
+                sidebarOverlay: !!sidebarOverlay,
+                categoryItems: categoryItems.length
+            });
+            
+            // Открытие меню
+            if (menuToggle && sidebarMenu) {
+                menuToggle.addEventListener('click', () => {
+                    console.log('Menu toggle clicked');
+                    sidebarMenu.classList.add('active');
+                    sidebarOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Закрытие меню
+            if (sidebarClose && sidebarMenu) {
+                sidebarClose.addEventListener('click', () => {
+                    console.log('Sidebar close clicked');
+                    sidebarMenu.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Закрытие по overlay
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', () => {
+                    console.log('Overlay clicked');
+                    sidebarMenu.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Обработчики для категорий
+            categoryItems.forEach((item, index) => {
+                console.log(`Setting up category item ${index}:`, item.getAttribute('data-category'));
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = item.getAttribute('data-category');
+                    console.log('Category clicked:', category);
+                    
+                    if (category) {
+                        // Закрываем меню
+                        sidebarMenu.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                        
+                        // Переходим к категории
+                        filterByCategory(category);
+                    }
+                });
+            });
+            
+            console.log('Sidebar initialization complete');
+        });
+    </script>
+</body>
+</html>
